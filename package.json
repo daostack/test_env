@@ -4,7 +4,8 @@
   "description": "Testing environment for DAOstack projects.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "migrate": "node ./migrate.js",
+    "release": "./release.sh"
   },
   "repository": {
     "type": "git",
