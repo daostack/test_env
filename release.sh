@@ -2,6 +2,8 @@
 echo "Creating a new release"
 npm ci
 
+npm run reset-migration
+
 migration_version=$(cat package.json  | jq -r '.dependencies."@daostack/migration"')
 docker_compose_migration_version=$(cat docker-compose.yml | grep daostack/migration | cut -d ":" -f 3 | sed "s/'//")
 package_version=$(cat package.json | jq -r '.version')
@@ -18,11 +20,14 @@ docker-compose build
 docker-compose up -d
 
 # wait a bit for graph-node to come (it will redirect with a 302)
-echo "waiting for ganache to start"
-sleep 10
+echo "waiting for subgraph to start"
+while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8000)" != "200" ]]; do sleep 5; done
 
 echo "migrating test environment"
 npm run migrate
+npm run deploy-subgraph
+
+sleep 300
 
 # commit the postgres image
 container_id=$(docker ps  -f "name=ganache" -l -q)
@@ -32,6 +37,21 @@ docker commit $container_id $image_name:$image_version
 echo "docker push $image_name:$image_version"
 docker push $image_name:$image_version
 
+# commit the postgres image
+container_id=$(docker ps  -f "name=postgres" -l -q)
+image_name=daostack/subgraph-postgres
+echo "docker commit $container_id $image_name:$image_version"
+docker commit $container_id $image_name:$image_version
+echo "docker push $image_name:$image_version"
+docker push $image_name:$image_version
+
+# commit the ipfs  image
+container_id=$(docker ps  -f "name=ipfs" -l -q)
+image_name=daostack/subgraph-ipfs
+echo "docker commit $container_id $image_name:$image_version"
+docker commit $container_id $image_name:$image_version
+echo "docker push $image_name:$image_version"
+docker push $image_name:$image_version
 
 docker-compose down -v
 # tag on github

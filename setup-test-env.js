@@ -1,4 +1,7 @@
 const utils = require('@daostack/migration/utils')
+const IPFSClient = require('ipfs-http-client');
+const ipfs = '/ip4/127.0.0.1/tcp/5001';
+
 async function assignGlobalVariables (web3, spinner, opts, logTx, previousMigration) {
   this.arcVersion = require('./package.json').dependencies['@daostack/arc']
   this.web3 = previousMigration
@@ -226,17 +229,34 @@ async function submitDemoProposals (accounts, web3, avatarAddress, externalToken
     actionMockAddress,
     this.opts
   )
+
   let callData = await actionMock.methods.test2(avatarAddress).encodeABI()
+  
+  let proposalIPFSData = {
+    description: 'Execute Action Proposal',
+    title: 'A modest proposal',
+    url: 'http://swift.org/modest',
+  };
+
+  let descHash = await writeProposalIPFS(proposalIPFSData);
   let gsProposalId = await submitGSProposal({
     avatarAddress: avatarAddress,
     callData,
-    descHash: '0x000000000000000000000000000000000000000000000000000000000000abcd'
+    descHash
   })
+
+  proposalIPFSData = {
+    description: 'Queued Contribution Proposal',
+    title: 'Reward contributor proposal',
+    url: 'http://swift.org/modest',
+  };
+
+  descHash = await writeProposalIPFS(proposalIPFSData);
 
   // QUEUED PROPOSAL //
   let queuedProposalId = await submitProposal({
     avatarAddress: avatarAddress,
-    descHash: '0x000000000000000000000000000000000000000000000000000000000000abcd',
+    descHash,
     rep: web3.utils.toWei('10'),
     tokens: web3.utils.toWei('10'),
     eth: web3.utils.toWei('10'),
@@ -259,10 +279,17 @@ async function submitDemoProposals (accounts, web3, avatarAddress, externalToken
     voter: accounts[1].address
   })
 
+  proposalIPFSData = {
+    description: 'Pre Boosted Contribution Proposal',
+    title: 'Second reward contributor proposal',
+    url: 'http://swift.org/modest',
+  };
+
+  descHash = await writeProposalIPFS(proposalIPFSData);
   // PRE BOOSTED PROPOSAL //
   let preBoostedProposalId = await submitProposal({
     avatarAddress: avatarAddress,
-    descHash: '0x000000000000000000000000000000000000000000000000000000000000efgh',
+    descHash,
     rep: web3.utils.toWei('10'),
     tokens: web3.utils.toWei('10'),
     eth: web3.utils.toWei('10'),
@@ -280,10 +307,18 @@ async function submitDemoProposals (accounts, web3, avatarAddress, externalToken
     amount: this.web3.utils.toWei('1000')
   })
 
+  proposalIPFSData = {
+    description: 'Boosted Contribution Proposal',
+    title: 'Third reward contributor proposal',
+    url: 'http://swift.org/modest',
+  };
+
+  descHash = await writeProposalIPFS(proposalIPFSData);
+
   // BOOSTED PROPOSAL //
   let boostedProposalId = await submitProposal({
     avatarAddress: avatarAddress,
-    descHash: '0x000000000000000000000000000000000000000000000000000000000000ijkl',
+    descHash,
     rep: web3.utils.toWei('10'),
     tokens: web3.utils.toWei('10'),
     eth: web3.utils.toWei('10'),
@@ -315,10 +350,17 @@ async function submitDemoProposals (accounts, web3, avatarAddress, externalToken
     voter: accounts[0].address
   })
 
+  proposalIPFSData = {
+    description: 'Executed Contribution Proposal',
+    title: 'Forth reward contributor proposal',
+    url: 'http://swift.org/modest',
+  };
+
+  descHash = await writeProposalIPFS(proposalIPFSData);
   // EXECUTED PROPOSAL //
   let executedProposalId = await submitProposal({
     avatarAddress: avatarAddress,
-    descHash: '0x000000000000000000000000000000000000000000000000000000000000ijkl',
+    descHash,
     rep: web3.utils.toWei('10'),
     tokens: web3.utils.toWei('10'),
     eth: web3.utils.toWei('10'),
@@ -687,6 +729,13 @@ async function increaseTime (duration, web3) {
       })
     })
   })
+}
+
+async function writeProposalIPFS(data) {
+  const ipfsClient = IPFSClient(ipfs);
+  const ipfsResponse = await ipfsClient.add(new Buffer(JSON.stringify(data)));
+
+  return ipfsResponse[0].path;
 }
 
 module.exports = migrateDemoTest
