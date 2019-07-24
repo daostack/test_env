@@ -104,6 +104,11 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
       address: this.base.SchemeRegistrar,
       params: srParamsHash,
       permissions: '0x0000001F'
+    },
+    {
+      address: await migrateReputationFromTokenScheme(avatarAddress),
+      params: '0x0000000000000000000000000000000000000000000000000000000000000000',
+      permissions: '0x00000001'
     }
   ]
 
@@ -416,6 +421,41 @@ async function migrateActionMock () {
   }).send()
 
   return actionMock.options.address
+}
+
+async function migrateReputationFromTokenScheme (avatarAddress) {
+  let { abi: externalTokenLockerMockABI, bytecode: externalTokenLockerMockBytecode } = require('@daostack/arc/build/contracts/ExternalTokenLockerMock.json')
+  spinner.start('Migrating ExternalTokenLockerMock...')
+  const externalTokenLockerMockContract = new web3.eth.Contract(externalTokenLockerMockABI, undefined, opts)
+  const externalTokenLockerMockDeployedContract = externalTokenLockerMockContract.deploy({
+    data: externalTokenLockerMockBytecode,
+    arguments: null
+  }).send()
+  tx = await new Promise(resolve => externalTokenLockerMockDeployedContract.on('receipt', resolve))
+  const externalTokenLockerMock = await externalTokenLockerMockDeployedContract
+  await logTx(tx, `${externalTokenLockerMock.options.address} => ExternalTokenLockerMock`)  
+  
+  let { abi: reputationFromTokenABI, bytecode: reputationFromTokenBytecode } = require('@daostack/arc/build/contracts/ReputationFromToken.json')
+  spinner.start('Migrating ReputationFromToken...')
+  const reputationFromTokenContract = new web3.eth.Contract(reputationFromTokenABI, undefined, opts)
+  const reputationFromTokenDeployedContract = reputationFromTokenContract.deploy({
+    data: reputationFromTokenBytecode,
+    arguments: null
+  }).send()
+  tx = await new Promise(resolve => reputationFromTokenDeployedContract.on('receipt', resolve))
+  const reputationFromToken = await reputationFromTokenDeployedContract
+  await logTx(tx, `${reputationFromToken.options.address} => ReputationFromToken`)
+
+  spinner.start('Setting ReputationFromToken...')
+
+  const reputationFromTokenInit = reputationFromToken.methods.initialize(
+    avatarAddress,
+    externalTokenLockerMock.options.address,
+    '0x0000000000000000000000000000000000000000'
+  )
+  tx = await reputationFromTokenInit.send()
+  await logTx(tx, 'Reputation From Token Scheme Initialized.')
+  return reputationFromToken.options.address
 }
 
 async function setContributionRewardParams (gpParamsHash) {
