@@ -30,7 +30,7 @@ services:
     environment:
       POSTGRES_PASSWORD: letmein
   ganache:
-    image: 'daostack/migration:0.0.1-rc.22-v0'
+    image: 'daostack/migration:0.0.1-rc.23-v0'
     # # to build from scratch, use the following..
     # image: 'trufflesuite/ganache-cli'
     # command:  -l 8000000 --networkId 1512051714758 --deterministic --hostname=0.0.0.0

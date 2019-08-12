@@ -37,7 +37,7 @@ while [[ $(curl --silent -H "Content-Type: application/json" -d '{"query":"{ sub
 echo "subgraph is synced"
 
 
-# commit the postgres image
+# commit the ganache image
 container_id=$(docker ps  -f "name=ganache" -l -q)
 image_name=daostack/test-env
 echo "docker commit $container_id $image_name:$image_version"
