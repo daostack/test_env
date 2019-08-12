@@ -14,9 +14,48 @@ const options = {
   params: JSON.parse(fs.readFileSync(path.join(__dirname, 'migration-params.json')))
 }
 
+function replaceContents(file, replacement, cb) {
+  fs.readFile(replacement, (err, contents) => {
+      if (err) return cb(err);
+      fs.writeFile(file, contents, cb);
+  });
+}
+
 void async function() {
   const DAOstackMigration = require('@daostack/migration');
   const setupTestEnv = require('./setup-test-env')
+<<<<<<< HEAD:deployEthereum.js
   // await DAOstackMigration.migrateBase(options)
   await DAOstackMigration.migrateScript(setupTestEnv)(options)
+=======
+  const arcVersion = require('./package.json').dependencies['@daostack/arc']
+  
+  let migration = (await DAOstackMigration.migrateScript(setupTestEnv)(options)).test[arcVersion]
+
+  let dao = {
+      name: migration.name,
+      Avatar: migration.Avatar,
+      DAOToken: migration.DAOToken,
+      Reputation: migration.Reputation,
+      Controller: migration.Controller,
+      Schemes: {
+        ReputationFromToken: migration.Schemes.ReputationFromToken
+      },
+      arcVersion
+    }
+  try {
+    await fs.writeFileSync(path.normalize(path.join(__dirname, './demodao.json')), JSON.stringify(dao, null, 4))
+    replaceContents(
+      'node_modules/@daostack/subgraph/daos/private/demodao.json',
+      './demodao.json',
+      err => {
+      if (err) {
+        console.log('failed to replace demo dao');
+      }
+      console.log('done');
+    });
+  } catch (e) {
+    console.log(e);
+  }
+>>>>>>> master:migrate.js
 }();
