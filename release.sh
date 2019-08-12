@@ -29,7 +29,7 @@ npm run deploy-subgraph
 
 sleep 300
 
-# commit the postgres image
+# commit the ganache image
 container_id=$(docker ps  -f "name=ganache" -l -q)
 image_name=daostack/test-env
 echo "docker commit $container_id $image_name:$image_version"

@@ -31,7 +31,8 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
 
   const {
     GenesisProtocol,
-    GEN
+    GEN,
+    UController
   } = this.base
 
   const GENToken = await new this.web3.eth.Contract(
@@ -89,6 +90,7 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
 
   const srParamsHash = await setSchemeRegistrarParams(gpParamsHash) // FIXME
 
+  let repFromTokenScheme = await migrateReputationFromTokenScheme(avatarAddress)
   const schemes = [
     {
       address: this.base.ContributionReward,
@@ -106,7 +108,7 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
       permissions: '0x0000001F'
     },
     {
-      address: await migrateReputationFromTokenScheme(avatarAddress),
+      address: repFromTokenScheme,
       params: '0x0000000000000000000000000000000000000000000000000000000000000000',
       permissions: '0x00000001'
     }
@@ -163,6 +165,10 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
     Avatar,
     DAOToken,
     Reputation,
+    Controller: UController,
+    Schemes: {
+      ReputationFromToken: repFromTokenScheme
+    },
     ActionMock,
     gsProposalId,
     queuedProposalId,
