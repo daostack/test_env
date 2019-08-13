@@ -13,10 +13,6 @@ async function assignGlobalVariables (web3, spinner, opts, logTx, previousMigrat
 }
 
 async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams, logTx, previousMigration }) {
-  // if (!(await confirm('About to migrate new Demo Test. Continue?'))) {
-  //   return
-  // }
-
   assignGlobalVariables(web3, spinner, opts, logTx, previousMigration)
 
   if (!this.base) {

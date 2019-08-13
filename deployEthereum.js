@@ -24,12 +24,9 @@ function replaceContents(file, replacement, cb) {
 void async function() {
   const DAOstackMigration = require('@daostack/migration');
   const setupTestEnv = require('./setup-test-env')
-<<<<<<< HEAD:deployEthereum.js
-  // await DAOstackMigration.migrateBase(options)
   await DAOstackMigration.migrateScript(setupTestEnv)(options)
-=======
   const arcVersion = require('./package.json').dependencies['@daostack/arc']
-  
+
   let migration = (await DAOstackMigration.migrateScript(setupTestEnv)(options)).test[arcVersion]
 
   let dao = {
@@ -57,5 +54,4 @@ void async function() {
   } catch (e) {
     console.log(e);
   }
->>>>>>> master:migrate.js
 }();

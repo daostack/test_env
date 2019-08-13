@@ -6,8 +6,7 @@
   "scripts": {
     "release": "./release.sh",
     "deploy-ethereum": "node ./deployEthereum.js",
-    "deploy-subgraph": "node ./deploySubgraph.js",
-    "xxxreset-migration": "cp -f node_modules/@daostack/migration/migration.json ./migration.json"
+    "deploy-subgraph": "node ./deploySubgraph.js"
   },
   "repository": {
     "type": "git",

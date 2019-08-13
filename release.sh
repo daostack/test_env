@@ -67,4 +67,6 @@ echo "create tag ${image_version}"
 git tag -a $image_version -m "Release of version $image_name:$image_version"
 git push --tags
 # done
+
+doker-compose down -v
 echo "Done!"

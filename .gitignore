@@ -8,3 +8,5 @@ verify.js
 flattened.*.sol
 subgraph.yaml
 schema.graphql
+migration.json
+daos/
