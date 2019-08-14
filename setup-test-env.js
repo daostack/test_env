@@ -67,7 +67,8 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
 
   const externalTokenAddress = await migrateExternalToken()
 
-  const randomName = utils.generateRnadomName()
+  // const randomName = utils.generateRnadomName()
+  const randomName = "Jelle Tests "
   const [orgName, tokenName, tokenSymbol, founders, tokenDist, repDist, cap] = [
     randomName,
     randomName + ' Token',
@@ -242,7 +243,7 @@ async function submitDemoProposals (accounts, web3, avatarAddress, externalToken
   )
 
   let callData = await actionMock.methods.test2(avatarAddress).encodeABI()
-  
+
   let proposalIPFSData = {
     description: 'Execute Action Proposal',
     title: 'A modest proposal',
@@ -439,8 +440,8 @@ async function migrateReputationFromTokenScheme (avatarAddress) {
   }).send()
   tx = await new Promise(resolve => externalTokenLockerMockDeployedContract.on('receipt', resolve))
   const externalTokenLockerMock = await externalTokenLockerMockDeployedContract
-  await logTx(tx, `${externalTokenLockerMock.options.address} => ExternalTokenLockerMock`)  
-  
+  await logTx(tx, `${externalTokenLockerMock.options.address} => ExternalTokenLockerMock`)
+
   let { abi: reputationFromTokenABI, bytecode: reputationFromTokenBytecode } = require('@daostack/arc/build/contracts/ReputationFromToken.json')
   spinner.start('Migrating ReputationFromToken...')
   const reputationFromTokenContract = new web3.eth.Contract(reputationFromTokenABI, undefined, opts)
