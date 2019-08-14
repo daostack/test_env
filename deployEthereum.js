@@ -24,7 +24,6 @@ function replaceContents(file, replacement, cb) {
 void async function() {
   const DAOstackMigration = require('@daostack/migration');
   const setupTestEnv = require('./setup-test-env')
-  await DAOstackMigration.migrateScript(setupTestEnv)(options)
   const arcVersion = require('./package.json').dependencies['@daostack/arc']
 
   let migration = (await DAOstackMigration.migrateScript(setupTestEnv)(options)).test[arcVersion]
@@ -39,19 +38,6 @@ void async function() {
         ReputationFromToken: migration.Schemes.ReputationFromToken
       },
       arcVersion
-    }
-  try {
-    await fs.writeFileSync(path.normalize(path.join(__dirname, './demodao.json')), JSON.stringify(dao, null, 4))
-    replaceContents(
-      'node_modules/@daostack/subgraph/daos/private/demodao.json',
-      './demodao.json',
-      err => {
-      if (err) {
-        console.log('failed to replace demo dao');
-      }
-      console.log('done');
-    });
-  } catch (e) {
-    console.log(e);
   }
+  await fs.writeFileSync(path.normalize(path.join(__dirname, './daos/private/demodao.json')), JSON.stringify(dao, null, 4))
 }();

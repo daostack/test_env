@@ -5,6 +5,8 @@ void async function() {
   const Subgraph = require('@daostack/subgraph');
   Subgraph.setupEnv({
     migrationFile: path.resolve('./migration.json'),
-    subgraphName: 'daostack'
+    daosDir: path.resolve('./daos'),
+    subgraphName: 'daostack',
+    // subgraphLocation: path.resolve('./subgraph.yaml')
   })
 }();
