@@ -32,7 +32,6 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
   const {
     GenesisProtocol,
     GEN,
-    UController
   } = this.base
 
   const GENToken = await new this.web3.eth.Contract(
@@ -130,6 +129,14 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
     this.opts
   )
 
+  let controller = new web3.eth.Contract(
+    require('@daostack/arc/build/contracts/Controller.json').abi,
+    await avatar.methods.owner().call(),
+    opts
+  )
+
+  let Controller = controller.options.address
+
   const Avatar = avatarAddress
   const DAOToken = await avatar.methods.nativeToken().call()
   const Reputation = await avatar.methods.nativeReputation().call()
@@ -165,7 +172,7 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
     Avatar,
     DAOToken,
     Reputation,
-    Controller: UController,
+    Controller,
     Schemes: {
       ReputationFromToken: repFromTokenScheme
     },
@@ -203,7 +210,6 @@ async function migrateDemoDao (orgName, tokenName, tokenSymbol, founders, tokenD
   this.spinner.start('Creating a new organization...')
 
   const {
-    UController,
     DaoCreator
   } = this.base
 
@@ -222,7 +228,7 @@ async function migrateDemoDao (orgName, tokenName, tokenSymbol, founders, tokenD
     founders,
     tokenDist,
     repDist,
-    UController,
+    '0x0000000000000000000000000000000000000000',
     cap
   )
 
