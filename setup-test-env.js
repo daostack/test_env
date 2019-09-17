@@ -85,7 +85,7 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
 
   const ActionMock = await migrateActionMock()
 
-  const gsParamsHash = await setGenericSchemeParams(gpParamsHash, ActionMock) // FIXME
+  // const gsParamsHash = await setGenericSchemeParams(gpParamsHash, ActionMock) // FIXME
 
   const srParamsHash = await setSchemeRegistrarParams(gpParamsHash) // FIXME
 
@@ -96,11 +96,11 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
       params: crParamsHash,
       permissions: '0x00000000' /* no special params */
     },
-    {
-      address: this.base.GenericScheme,
-      params: gsParamsHash,
-      permissions: '0x00000010'
-    },
+    // {
+    //   address: this.base.GenericScheme,
+    //   params: gsParamsHash,
+    //   permissions: '0x00000010'
+    // },
     {
       address: this.base.SchemeRegistrar,
       params: srParamsHash,
@@ -114,6 +114,30 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
   ]
 
   await setSchemes(schemes, avatarAddress, 'metaData')
+  // register the avatar with the GenericScheme
+  console.log(`initialize GenericScheme`)
+  const genericScheme = new this.web3.eth.Contract(
+    require('@daostack/arc/build/contracts/GenericScheme.json').abi,
+    this.base.UGenericScheme,
+    this.opts
+  )
+  console.log(`calling initialize with the following parameters`)
+  const params =  {
+    avatarAddress, // _avatar
+    GenesisProtocol, // _votingMachine
+    gpParamsHash, // _voteParams
+    ActionMock
+  }
+  console.log(params)
+
+
+  await genericScheme.methods.initialize(
+    avatarAddress, // _avatar
+    GenesisProtocol, // _votingMachine
+    gpParamsHash, // _voteParams
+    ActionMock
+  ).send()
+  console.log(`done`)
 
   const {
     gsProposalId,
@@ -248,7 +272,7 @@ async function submitDemoProposals (accounts, web3, avatarAddress, externalToken
   )
 
   let callData = await actionMock.methods.test2(avatarAddress).encodeABI()
-  
+
   let proposalIPFSData = {
     description: 'Execute Action Proposal',
     title: 'A modest proposal',
@@ -445,8 +469,8 @@ async function migrateReputationFromTokenScheme (avatarAddress) {
   }).send()
   tx = await new Promise(resolve => externalTokenLockerMockDeployedContract.on('receipt', resolve))
   const externalTokenLockerMock = await externalTokenLockerMockDeployedContract
-  await logTx(tx, `${externalTokenLockerMock.options.address} => ExternalTokenLockerMock`)  
-  
+  await logTx(tx, `${externalTokenLockerMock.options.address} => ExternalTokenLockerMock`)
+
   let { abi: reputationFromTokenABI, bytecode: reputationFromTokenBytecode } = require('@daostack/arc/build/contracts/ReputationFromToken.json')
   spinner.start('Migrating ReputationFromToken...')
   const reputationFromTokenContract = new web3.eth.Contract(reputationFromTokenABI, undefined, opts)
@@ -640,6 +664,7 @@ async function setSchemes (schemes, avatarAddress, metadata) {
 
   await this.logTx(tx, 'Dao Creator Set Schemes.')
 }
+
 async function submitGSProposal ({
   avatarAddress,
   callData,
