@@ -25,7 +25,7 @@
   "homepage": "https://github.com/daostack/test_env#readme",
   "dependencies": {
     "@daostack/arc": "0.0.1-rc.24",
-    "@daostack/migration": "0.0.1-rc.24-v1",
+    "@daostack/migration": "0.0.1-rc.24-v3",
     "@daostack/subgraph": "0.0.27-1",
     "ipfs-http-client": "^32.0.1"
   }
