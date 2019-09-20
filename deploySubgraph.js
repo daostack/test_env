@@ -1,8 +1,8 @@
 const fs = require('fs')
 const path = require('path')
+const Subgraph = require('@daostack/subgraph');
 
 void async function() {
-  const Subgraph = require('@daostack/subgraph');
   Subgraph.setupEnv({
     migrationFile: path.resolve('./migration.json'),
     daosDir: path.resolve('./daos'),
