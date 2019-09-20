@@ -1,14 +1,13 @@
 {
   "name": "@daostack/test-env",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Testing environment for DAOstack projects.",
   "main": "index.js",
   "scripts": {
-    "migrate": "node ./migrate.js",
     "release": "./release.sh",
-    "prepare-subgraph": "npm explore @daostack/subgraph -- npm i && node setup-subgraph.js",
-    "deploy-subgraph": "npm run prepare-subgraph && npm explore @daostack/subgraph -- npm run deploy",
-    "reset-migration": "cp -f node_modules/@daostack/migration/migration.json ./migration.json"
+    "deploy-ethereum": "node ./deployEthereum.js",
+    "deploy-subgraph": "node ./deploySubgraph.js",
+    "migrate": "npm run deploy-subgraph"
   },
   "repository": {
     "type": "git",

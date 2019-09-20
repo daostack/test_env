@@ -6,3 +6,7 @@ abis
 verify.js.map
 verify.js
 flattened.*.sol
+subgraph.yaml
+schema.graphql
+migration.json
+daos/
