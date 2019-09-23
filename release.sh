@@ -92,6 +92,6 @@ if [[ $devmode != 1 ]]; then
   git push --tags
   # done
 
-  doker-compose down -v
+  docker-compose down -v
   echo "Done!"
 fi
