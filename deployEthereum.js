@@ -26,8 +26,10 @@ void async function() {
   const setupTestEnv = require('./setup-test-env')
   const arcVersion = require('./package.json').dependencies['@daostack/arc']
 
-  console.log(options)
-  let migration = (await DAOstackMigration.migrateScript(setupTestEnv)(options)).test[arcVersion]
+  let migration = (await DAOstackMigration.migrateScript(setupTestEnv)(options))
+  console.log(migration)
+  migration = migration.test[arcVersion]
+  return
 
   let dao = {
       name: migration.name,

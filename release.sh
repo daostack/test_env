@@ -60,7 +60,7 @@ echo "subgraph is synced"
 
 
 if [[ $devmode != 1 ]]; then
-  echo "published new docker images"
+  echo "publish new docker images"
   # commit the ganache image
   container_id=$(docker ps  -f "name=ganache" -l -q)
   image_name=daostack/test-env
@@ -92,6 +92,6 @@ if [[ $devmode != 1 ]]; then
   git push --tags
   # done
 
-  doker-compose down -v
+  docker-compose down -v
   echo "Done!"
 fi
