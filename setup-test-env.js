@@ -1,6 +1,8 @@
 // const utils = require('./utils.js')
 async function assignGlobalVariables (web3, spinner, opts, logTx, previousMigration) {
-  this.arcVersion = require('./package.json').dependencies['@daostack/arc']
+  // this.arcVersion = require(`${require.resolve('@daostack/arc')}/../package.json`).version
+
+  this.arcVersion = require(`${require.resolve('@daostack/migration')}/../package.json`).dependencies['@daostack/arc']
   this.web3 = web3
   this.spinner = spinner
   this.opts = opts
@@ -16,7 +18,7 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
   assignGlobalVariables(web3, spinner, opts, logTx, previousMigration)
 
   if (!this.base) {
-    const msg = `Couldn't find existing base migration ('migration.json' > 'base').`
+    const msg = `Couldn't find existing base migration ('migration.json' > 'base') - does the migration file contain definitions for ${this.arcVersion}?.`
     this.spinner.fail(msg)
     throw new Error(msg)
   }
