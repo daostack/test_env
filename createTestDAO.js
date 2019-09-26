@@ -63,7 +63,7 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
   const externalTokenAddress = await migrateExternalToken()
 
   // const randomName = utils.generateRnadomName()
-  const randomName = "Some Random Name"
+  const randomName = "DAO For Testing"
   const [orgName, tokenName, tokenSymbol, founders, tokenDist, repDist, cap] = [
     randomName,
     randomName + ' Token',
@@ -131,7 +131,11 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
     this.spinner.start('Registering DAO in DAORegistry')
     let DAOname = await avatar.methods.orgName().call()
     let tx = await daoRegistry.methods.propose(avatar.options.address).send()
-    tx = await daoRegistry.methods.register(avatar.options.address, DAOname).send()
+    try {
+      tx = await daoRegistry.methods.register(avatar.options.address, DAOname).send()
+    } catch(err) {
+      console.log(`ERRROR registering dao: ${err.message}`)
+    }
     await this.logTx(tx, 'Finished Registering DAO in DAORegistry')
   }
 
@@ -562,6 +566,7 @@ async function setSchemes (schemes, avatarAddress, metadata) {
 
   await this.logTx(tx, 'Dao Creator Set Schemes.')
 }
+
 async function submitGSProposal ({
   avatarAddress,
   callData,
