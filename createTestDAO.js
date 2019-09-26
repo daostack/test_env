@@ -23,7 +23,8 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
   const {
     DAORegistry,
     GenesisProtocol,
-    GEN
+    GEN,
+    UController
   } = this.base
 
   web3.eth.accounts.wallet.clear()
@@ -133,10 +134,10 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
     let tx = await daoRegistry.methods.propose(avatar.options.address).send()
     try {
       tx = await daoRegistry.methods.register(avatar.options.address, DAOname).send()
+      await this.logTx(tx, 'Finished Registering DAO in DAORegistry')
     } catch(err) {
       console.log(`ERRROR registering dao: ${err.message}`)
     }
-    await this.logTx(tx, 'Finished Registering DAO in DAORegistry')
   }
 
   const Avatar = avatarAddress
@@ -178,6 +179,8 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
     gsProposalId,
     queuedProposalId,
     preBoostedProposalId,
+    Controller: UController,
+    Schemes: schemes, 
     boostedProposalId,
     executedProposalId,
     organs: {

@@ -24,10 +24,7 @@ void async function() {
   const createTestDAO = require('./createTestDAO')
   let migration = (await DAOstackMigration.migrateScript(createTestDAO)(options))
 
-  console.log(migration)
-  console.log(arcVersion)
   migration = migration.test[arcVersion]
-  console.log(migration)
 
   const testDAOInfo = {
       name: migration.name,
@@ -35,6 +32,7 @@ void async function() {
       DAOToken: migration.DAOToken,
       Reputation: migration.Reputation,
       Controller: migration.Controller,
+      Schemes: migration.Schemes,
       // Schemes: {
       //   ReputationFromToken: migration.Schemes.ReputationFromToken
       // },
@@ -42,16 +40,15 @@ void async function() {
   }
   // write data to the daos directory where the subgraph deployment can find it
   console.log(testDAOInfo)
-  await fs.writeFileSync(path.normalize(path.join(__dirname, './daos/private/testdao.json')), JSON.stringify(testDAOInfo, null, 4))
+  console.log(migration)
+  await fs.writeFileSync(path.normalize(path.join(__dirname, './daos/private/test.json')), JSON.stringify(testDAOInfo, null, 4))
   console.log(`Done creating Test DAO`)
 
   console.log(`Creating NecDAO`)
   const createNecDAO = require('./createNecDAO')
   migration = (await DAOstackMigration.migrateScript(createNecDAO)(options))
-  console.log(migration)
   migration = migration.test[arcVersion]
 
-  console.log(migration)
 
   const nectarDAOInfo = {
       name: migration.name,
@@ -59,9 +56,7 @@ void async function() {
       DAOToken: migration.DAOToken,
       Reputation: migration.Reputation,
       Controller: migration.Controller,
-      // Schemes: {
-      //   ReputationFromToken: migration.Schemes.ReputationFromToken
-      // },
+      Schemes: migration.Schemes,
       arcVersion
   }
   console.log(nectarDAOInfo)
