@@ -88,6 +88,8 @@ if [[ $devmode != 1 ]]; then
   docker-compose down -v
   # tag on github
   echo "create tag ${image_version}"
+  # git add migration.json
+  # git commit `release of version $image_name:$image_version`
   git tag -a $image_version -m "Release of version $image_name:$image_version"
   git push --tags
   # done
