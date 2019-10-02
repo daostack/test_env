@@ -23,7 +23,8 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
   const {
     DAORegistry,
     GenesisProtocol,
-    GEN
+    GEN,
+    UController
   } = this.base
 
   web3.eth.accounts.wallet.clear()
@@ -63,7 +64,7 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
   const externalTokenAddress = await migrateExternalToken()
 
   // const randomName = utils.generateRnadomName()
-  const randomName = "Some Random Name"
+  const randomName = "DAO For Testing"
   const [orgName, tokenName, tokenSymbol, founders, tokenDist, repDist, cap] = [
     randomName,
     randomName + ' Token',
@@ -131,8 +132,12 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
     this.spinner.start('Registering DAO in DAORegistry')
     let DAOname = await avatar.methods.orgName().call()
     let tx = await daoRegistry.methods.propose(avatar.options.address).send()
-    tx = await daoRegistry.methods.register(avatar.options.address, DAOname).send()
-    await this.logTx(tx, 'Finished Registering DAO in DAORegistry')
+    try {
+      tx = await daoRegistry.methods.register(avatar.options.address, DAOname).send()
+      await this.logTx(tx, 'Finished Registering DAO in DAORegistry')
+    } catch(err) {
+      console.log(`ERRROR registering dao: ${err.message}`)
+    }
   }
 
   const Avatar = avatarAddress
@@ -174,6 +179,8 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
     gsProposalId,
     queuedProposalId,
     preBoostedProposalId,
+    Controller: UController,
+    Schemes: schemes, 
     boostedProposalId,
     executedProposalId,
     organs: {
@@ -562,6 +569,7 @@ async function setSchemes (schemes, avatarAddress, metadata) {
 
   await this.logTx(tx, 'Dao Creator Set Schemes.')
 }
+
 async function submitGSProposal ({
   avatarAddress,
   callData,
