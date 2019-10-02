@@ -43,8 +43,15 @@ void async function() {
 
   console.log(`Creating Nectar DAO`)
   const { createNectarDAO } = require('./createNecDAO')
-  const nectarDAOInfo = await createNectarDAO(options)
+  const migrationInfo = await createNectarDAO(options)
+  console.log(migrationInfo)
   // write data to the daos directory where the subgraph deployment can find it
+
+  const version = '0.0.1-rc.28'
+  const nectarDAOInfo = migrationInfo['dao'][version]
+  nectarDAOInfo.arcVersion = version
+  console.log(nectarDAOInfo)
+  console.log('WRITING TO nectardao.json')
   await fs.writeFileSync(path.normalize(path.join(__dirname, './daos/private/nectardao.json')), JSON.stringify(nectarDAOInfo, null, 4))
   console.log(`Done creating Nectar DAO`)
 }();
