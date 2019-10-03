@@ -38,7 +38,7 @@ void async function() {
   // write data to the daos directory where the subgraph deployment can find it
   console.log(testDAOInfo)
   console.log(migration)
-  await fs.writeFileSync(path.normalize(path.join(__dirname, './daos/private/test.json')), JSON.stringify(testDAOInfo, null, 4))
+  await fs.writeFileSync(path.normalize(path.join(__dirname, 'node_modules/@daostack/subgraph/daos/private/test.json')), JSON.stringify(testDAOInfo, null, 4))
   console.log(`Done creating Test DAO`)
 
   console.log(`Creating Nectar DAO`)
@@ -52,6 +52,6 @@ void async function() {
   nectarDAOInfo.arcVersion = version
   console.log(nectarDAOInfo)
   console.log('WRITING TO nectardao.json')
-  await fs.writeFileSync(path.normalize(path.join(__dirname, './daos/private/nectardao.json')), JSON.stringify(nectarDAOInfo, null, 4))
+  await fs.writeFileSync(path.normalize(path.join(__dirname, 'node_modules/@daostack/subgraph/daos/private/nectardao.json')), JSON.stringify(nectarDAOInfo, null, 4))
   console.log(`Done creating Nectar DAO`)
 }();

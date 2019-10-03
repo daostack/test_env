@@ -38,6 +38,8 @@ rm subgraph.yaml
 rm scheme.graphql
 rm -r daos/private/*
 
+
+
 echo "waiting for ganache to start"
 while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8545)" != "400" ]]; do sleep 5; done
 
@@ -47,9 +49,16 @@ echo "deploying ethereum contracts and doing transactions...."
 docker-compose exec  ganache cat migration.json > migration.json
 npm run deploy-ethereum
 
+cd node_modules/@daostack/subgraph
+npm i
+
 echo "waiting for graph-node to start"
 while [[ ! "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8000)" =~ ^(200|302)$ ]]; do sleep 5; done
-npm run deploy-subgraph
+npm run deploy
+
+cd ../../
+cp node_modules/@daostack/subgraph/subgraph.yaml .
+cp node_modules/@daostack/subgraph/schema.graphql .
 
 echo "waiting for subgraph to finish indexing"
 while [[ $(curl --silent -H "Content-Type: application/json" -d '{"query":"{ subgraphs (where: { name:\"daostack\"}) { id name currentVersion { deployment { synced }}}}","variables":null,"operationName":null}' -X POST http://localhost:8000/subgraphs \
