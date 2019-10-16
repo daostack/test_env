@@ -33,34 +33,20 @@ void async function() {
       Reputation: migration.Reputation,
       Controller: migration.Controller,
       Schemes: migration.Schemes,
-      // Schemes: {
-      //   ReputationFromToken: migration.Schemes.ReputationFromToken
-      // },
       arcVersion
   }
   // write data to the daos directory where the subgraph deployment can find it
-  console.log(testDAOInfo)
-  console.log(migration)
-  await fs.writeFileSync(path.normalize(path.join(__dirname, './daos/private/test.json')), JSON.stringify(testDAOInfo, null, 4))
+  await fs.writeFileSync(path.normalize(path.join(__dirname, 'node_modules/@daostack/subgraph/daos/private/test.json')), JSON.stringify(testDAOInfo, null, 4))
   console.log(`Done creating Test DAO`)
 
-  console.log(`Creating NecDAO`)
-  const createNecDAO = require('./createNecDAO')
-  migration = (await DAOstackMigration.migrateScript(createNecDAO)(options))
-  migration = migration.test[arcVersion]
-
-
-  const nectarDAOInfo = {
-      name: migration.name,
-      Avatar: migration.Avatar,
-      DAOToken: migration.DAOToken,
-      Reputation: migration.Reputation,
-      Controller: migration.Controller,
-      Schemes: migration.Schemes,
-      arcVersion
-  }
-  console.log(nectarDAOInfo)
+  console.log(`Creating Nectar DAO`)
+  const { createNectarDAO } = require('./createNecDAO')
+  const migrationInfo = await createNectarDAO(options)
   // write data to the daos directory where the subgraph deployment can find it
-  await fs.writeFileSync(path.normalize(path.join(__dirname, './daos/private/nectardao.json')), JSON.stringify(nectarDAOInfo, null, 4))
-  console.log(`Done creating NecDAO`)
+
+  const version = '0.0.1-rc.28'
+  const nectarDAOInfo = migrationInfo['dao'][version]
+  nectarDAOInfo.arcVersion = version
+  await fs.writeFileSync(path.normalize(path.join(__dirname, 'node_modules/@daostack/subgraph/daos/private/nectardao.json')), JSON.stringify(nectarDAOInfo, null, 4))
+  console.log(`Done creating Nectar DAO`)
 }();
