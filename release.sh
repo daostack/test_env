@@ -1,5 +1,7 @@
 #!/bin/bash
 echo "Creating a new release"
+set -x # echo on
+set -e # exit on error
 
 while getopts "h?d" opt; do
     case "$opt" in
