@@ -9,6 +9,9 @@ services:
   - docker
 notifications:
   email: false
+  
+before_install:
+  - sudo apt-get install libsecret-1-dev
 
 script:
   - echo 'npm ci:' && echo -en 'travis_fold:start:script.1\\r'
