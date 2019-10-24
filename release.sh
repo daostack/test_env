@@ -35,10 +35,10 @@ fi
 # fi
 
 # clean up local environment
-rm migration.json
-rm subgraph.yaml
-rm scheme.graphql
-rm -r daos/private/*
+rm -f migration.json
+rm -f subgraph.yaml
+rm -f scheme.graphql
+rm -rf daos/private/*
 
 
 
