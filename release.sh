@@ -28,11 +28,9 @@ if [[ $docker_compose_migration_version != $migration_version ]]; then
   exit
 fi
 
-# if [[ $devmode != 1 ]]; then
-  echo "Starting fresh docker containers..."
-  docker-compose down -v
-  docker-compose up -d
-# fi
+echo "Starting fresh docker containers..."
+docker-compose down -v
+docker-compose up -d
 
 # clean up local environment
 rm -f migration.json
@@ -52,13 +50,17 @@ docker-compose exec  ganache cat migration.json > migration.json
 npm run deploy-ethereum
 
 cd node_modules/@daostack/subgraph
+rm -rf node_modules # must do this to workaround a bug
 npm i
 
 echo "waiting for graph-node to start"
 while [[ ! "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8000)" =~ ^(200|302)$ ]]; do sleep 5; done
 npm run deploy
 
-cd ../../
+# go back to the script directory
+# echo "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cd ../../../
+echo pwd
 cp node_modules/@daostack/subgraph/subgraph.yaml .
 cp node_modules/@daostack/subgraph/schema.graphql .
 

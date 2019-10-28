@@ -19,6 +19,19 @@ These images can be used as in the examples https://github.com/daostack/client/b
 - `npm`
 - `docker`
 
+## Create a new release
+
+`./release.sh` will create a new release, which will run the following steps:
+
+1. (re)start fresh docker containers for ipfs, postgres, graph-node, ganache
+1. deploy the contracts, DAOs, proposals, etc to ganache using `npm run deploy-ethereum`
+1. build a subgraph that indexes these using `npm run deploy-subgraph`
+1. tag and publish the docker contains to dockerhub
+
+
+`./release.sh -d` will run the script in development mode, which will run all the steps except publish the ersult on docker hub
+
+
 ## Instructions
 
 Create and release new images for a new [Arc](https://github.com/daostack/arc/)/[subgraph](https://github.com/daostack/subgraph/) combo.
@@ -32,14 +45,6 @@ Create and release new images for a new [Arc](https://github.com/daostack/arc/)/
 - `npm run migrate` deploy some DAOs and other contracts (in addition to those already available from the `@daostack/migration` image. If the `Arc` version has changed, this script may break. If so, fix it.
 - `npm run deploy-subgraph`: will generate and deploy the subgraph.  `http://127.0.0.1:8000`
 
-`./release.sh` will create a new release, which will run the following steps:
-
-1. (re)start fresh docker containers for ipfs, postgres, graph-node, ganache
-1. deploy the contracts, DAOs, proposals, etc to ganache using `npm run deploy-ethereum`
-1. build a subgraph that indexes these using `npm run deploy-subgraph`
-1. tag and publish the docker contains to dockerhub
-
-to run the deploy-to-ethereum-and-index-what-you-deployed without actually publishing the images, run `./release.sh -d` (`d` for `devmode`)
 
 ## available accounts
 
