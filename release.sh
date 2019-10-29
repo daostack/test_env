@@ -41,7 +41,9 @@ rm -rf daos/private/*
 
 
 echo "waiting for ganache to start"
+set +x
 while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8545)" != "400" ]]; do sleep 5; done
+set -x
 
 
 # copy the migration file from the migration repo
@@ -54,7 +56,9 @@ rm -rf node_modules # must do this to workaround a bug
 npm i
 
 echo "waiting for graph-node to start"
+set +x
 while [[ ! "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8000)" =~ ^(200|302)$ ]]; do sleep 5; done
+set -x
 npm run deploy
 
 # go back to the script directory

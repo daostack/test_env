@@ -44,8 +44,12 @@ void async function() {
   const migrationInfo = await createNectarDAO(options)
   // write data to the daos directory where the subgraph deployment can find it
 
-  const version = '0.0.1-rc.28'
+  const version = '0.0.1-rc.30'
   const nectarDAOInfo = migrationInfo['dao'][version]
+  if (nectarDAOInfo.name !== 'Nectar DAO') {
+    msg = `Unexpected DAO name: expected "Nectar DAO", found ${nectarDAOInfo.name}; perhaps you specified the wrong version (in the code ehre above?)`
+    throw Error(msg)
+  }
   nectarDAOInfo.arcVersion = version
   await fs.writeFileSync(path.normalize(path.join(__dirname, 'node_modules/@daostack/subgraph/daos/private/nectardao.json')), JSON.stringify(nectarDAOInfo, null, 4))
   console.log(`Done creating Nectar DAO`)
