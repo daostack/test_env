@@ -1,7 +1,7 @@
 {
-  "orgName": "Nectar DAO",
-  "tokenName": "Nectar DAO Token",
-  "tokenSymbol": "NDT",
+  "orgName": "DutchX DAO",
+  "tokenName": "DutchX DAO Token",
+  "tokenSymbol": "DDT",
   "ContributionReward": [
     {
       "voteParams": 0
@@ -32,96 +32,11 @@
         {
           "voteParams": 1
         },
-        "0xe7410170f87102DF0055eB195163A03B7F2Bff4A"
+        "0xb279182d99e65703f0076e4812653aab85fca0f0"
       ],
       "permissions": "0x00000010",
-      "alias": "GenericSchemeENSPublicResolver",
+      "alias": "GenericSchemeDutchX",
       "fromArc": true
-    },
-    {
-      "name": "GenericScheme",
-      "schemeName": "GenericScheme",
-      "isUniversal": false,
-      "params": [
-        "GenesisProtocolAddress",
-        {
-          "voteParams": 0
-        },
-        {
-          "StandAloneContract": 1
-        }
-      ],
-      "permissions": "0x00000010",
-      "alias": "GenericSchemeENSRegistry",
-      "fromArc": true
-    },
-    {
-      "name": "GenericScheme",
-      "schemeName": "GenericScheme",
-      "isUniversal": false,
-      "params": [
-        "GenesisProtocolAddress",
-        {
-          "voteParams": 2
-        },
-        {
-          "StandAloneContract": 0
-        }
-      ],
-      "permissions": "0x00000010",
-      "alias": "GenericSchemeRegistryLookup",
-      "fromArc": true
-    },
-    {
-      "name": "ContinuousLocking4Reputation",
-      "schemeName": "ContinuousLocking4Reputation",
-      "isUniversal": false,
-      "params": [
-        850000,
-        1569963600,
-        7200,
-        1570014000,
-        12,
-        85000,
-        900,
-        100,
-        "0x543Ff227F64Aa17eA132Bf9886cAb5DB55DCAddf",
-        "0x0000000000000000000000000000000000000000"
-      ],
-      "permissions": "0x00000010",
-      "alias": "InfiniteReputation4Token",
-      "fromArc": true
-    },
-    {
-      "name": "Auction4Reputation",
-      "schemeName": "Auction4Reputation",
-      "isUniversal": false,
-      "params": [
-        50000,
-        1569963600,
-        720,
-        10,
-        1570014000,
-        "0x543Ff227F64Aa17eA132Bf9886cAb5DB55DCAddf",
-        "AvatarAddress",
-        "0x0000000000000000000000000000000000000000"
-      ],
-      "permissions": "0x00000010",
-      "alias": "GENAuction",
-      "fromArc": true
-    },
-    {
-      "name": "ReputationFromToken",
-      "isUniversal": false,
-      "params": [
-        {
-          "StandAloneContract": 1
-        },
-        "0x0000000000000000000000000000000000000001"
-      ],
-      "alias": "ReputationFromToken",
-      "fromArc": true,
-      "permissions": "0x00000000"
     }
   ],
   "VotingMachinesParams": [
