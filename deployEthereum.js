@@ -1,5 +1,5 @@
-const fs = require('fs')
-const path = require('path')
+const fs = require('fs');
+const path = require('path');
 
 const options = {
   quiet: false,
@@ -12,19 +12,32 @@ const options = {
   // prevmigration: path.normalize(path.join(__dirname, './migration.json')),
   output: path.normalize(path.join(__dirname, './migration.json')),
   params: JSON.parse(fs.readFileSync(path.join(__dirname, 'migration-params.json')))
-}
+};
 
-void async function() {
+ async function deployDaos() {
   const DAOstackMigration = require('@daostack/migration');
   // const arcVersion = require('./package.json').dependencies['@daostack/arc']
-  const arcVersion = require('@daostack/arc/package.json').version
-  console.log(arcVersion)
+  const VERSION = require('@daostack/arc/package.json').version;
 
-  console.log(`Creating Test DAO`)
-  const createTestDAO = require('./createTestDAO')
-  let migration = (await DAOstackMigration.migrateScript(createTestDAO)(options))
+  console.log(`Creating DutchX DAO`);
+  const { createDutchXDAO } = require('./createDutchXDAO');
+  const dutchXCreateInfo = await createDutchXDAO(options);
+  // write data to the daos directory where the subgraph deployment can find it
 
-  migration = migration.test[arcVersion]
+  const dutchXDAOInfo = dutchXCreateInfo['dao'][VERSION];
+  if (dutchXDAOInfo.name !== 'DutchX DAO') {
+    let msg = `Unexpected DAO name: expected "DutchX DAO", found ${dutchXDAOInfo.name}; perhaps you specified the wrong version (in the code ehre above?)`;
+    throw Error(msg);
+  }
+  dutchXDAOInfo.arcVersion = VERSION;
+  await fs.writeFileSync(path.normalize(path.join(__dirname, 'node_modules/@daostack/subgraph/daos/private/dutchxdao.json')), JSON.stringify(dutchXDAOInfo, null, 4));
+  console.log(`Done creating DutchX DAO`);
+
+  console.log(`Creating Test DAO`);
+  const createTestDAO = require('./createTestDAO');
+  let migration = (await DAOstackMigration.migrateScript(createTestDAO)(options));
+
+  migration = migration.test[arcVersion];
 
   const testDAOInfo = {
       name: migration.name,
@@ -34,19 +47,24 @@ void async function() {
       Controller: migration.Controller,
       Schemes: migration.Schemes,
       arcVersion
+  };
+  // write data to the daos directory where the subgraph deployment can find it
+  await fs.writeFileSync(path.normalize(path.join(__dirname, 'node_modules/@daostack/subgraph/daos/private/test.json')), JSON.stringify(testDAOInfo, null, 4));
+  console.log(`Done creating Test DAO`);
+
+  console.log(`Creating Nectar DAO`);
+  const { createNectarDAO } = require('./createNecDAO');
+  const migrationInfo = await createNectarDAO(options);
+  // write data to the daos directory where the subgraph deployment can find it
+
+  const nectarDAOInfo = migrationInfo['dao'][VERSION];
+  if (nectarDAOInfo.name !== 'Nectar DAO') {
+    let msg = `Unexpected DAO name: expected "Nectar DAO", found ${nectarDAOInfo.name}; perhaps you specified the wrong version (in the code ehre above?)`;
+    throw Error(msg);
   }
-  // write data to the daos directory where the subgraph deployment can find it
-  await fs.writeFileSync(path.normalize(path.join(__dirname, 'node_modules/@daostack/subgraph/daos/private/test.json')), JSON.stringify(testDAOInfo, null, 4))
-  console.log(`Done creating Test DAO`)
+  nectarDAOInfo.arcVersion = VERSION;
+  await fs.writeFileSync(path.normalize(path.join(__dirname, 'node_modules/@daostack/subgraph/daos/private/nectardao.json')), JSON.stringify(nectarDAOInfo, null, 4));
+  console.log(`Done creating Nectar DAO`);
+}
 
-  console.log(`Creating Nectar DAO`)
-  const { createNectarDAO } = require('./createNecDAO')
-  const migrationInfo = await createNectarDAO(options)
-  // write data to the daos directory where the subgraph deployment can find it
-
-  const version = '0.0.1-rc.28'
-  const nectarDAOInfo = migrationInfo['dao'][version]
-  nectarDAOInfo.arcVersion = version
-  await fs.writeFileSync(path.normalize(path.join(__dirname, 'node_modules/@daostack/subgraph/daos/private/nectardao.json')), JSON.stringify(nectarDAOInfo, null, 4))
-  console.log(`Done creating Nectar DAO`)
-}();
+deployDaos().catch((err) => { console.error(err); process.exit(1);});

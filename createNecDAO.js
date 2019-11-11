@@ -3,7 +3,9 @@ const { migrateDAO } = require('@daostack/migration')
 
 async function createNectarDAO(options) {
   options.params = require('./nectardao-params.json')
-  return migrateDAO(options)
+  const result = await migrateDAO(options)
+
+  return result
 }
 async function assignGlobalVariables (web3, spinner, opts, logTx, previousMigration) {
   this.arcVersion = require('@daostack/arc/package.json').version

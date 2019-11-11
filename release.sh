@@ -1,7 +1,8 @@
 #!/bin/bash
 echo "Creating a new release"
+set -e # exit on error
 
-while getopts "h?d" opt; do
+while getopts "h?dfs" opt; do
     case "$opt" in
       h|\?)
         echo "create and publish a new release. Pass the option -d to run without restarting and publishing in th docker containers"
@@ -11,6 +12,9 @@ while getopts "h?d" opt; do
         echo "running in devmode"
         ;;
       f)  output_file=$OPTARG
+        ;;
+      s)  skip_install=1
+        echo "skip npm install"
         ;;
     esac
 done
@@ -26,46 +30,47 @@ if [[ $docker_compose_migration_version != $migration_version ]]; then
   exit
 fi
 
-# if [[ $devmode != 1 ]]; then
-  echo "Starting fresh docker containers..."
-  docker-compose down -v
-  docker-compose up -d
-# fi
-
-# clean up local environment
-rm migration.json
-rm subgraph.yaml
-rm scheme.graphql
-rm -r daos/private/*
+echo "Starting fresh docker containers..."
+set -x # echo on
+docker-compose down -v
+docker-compose up -d
 
 
-
+set +x
 echo "waiting for ganache to start"
 while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8545)" != "400" ]]; do sleep 5; done
+set -x
 
 
 # copy the migration file from the migration repo
 echo "deploying ethereum contracts and doing transactions...."
+# clean up local environment
+rm -f migration.json
 docker-compose exec  ganache cat migration.json > migration.json
 npm run deploy-ethereum
 
 cd node_modules/@daostack/subgraph
-npm i
+rm -rf node_modules # must do this to workaround a bug
+if [[ $skip_install != 1 ]]; then
+  npm i
+fi
 
 echo "waiting for graph-node to start"
+set +x
 while [[ ! "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8000)" =~ ^(200|302)$ ]]; do sleep 5; done
+set -x
 npm run deploy
 
-cd ../../
-cp node_modules/@daostack/subgraph/subgraph.yaml .
-cp node_modules/@daostack/subgraph/schema.graphql .
+cd ../../../
+echo pwd
 
+set +x
 echo "waiting for subgraph to finish indexing"
 while [[ $(curl --silent -H "Content-Type: application/json" -d '{"query":"{ subgraphs (where: { name:\"daostack\"}) { id name currentVersion { deployment { synced }}}}","variables":null,"operationName":null}' -X POST http://localhost:8000/subgraphs \
   | jq -r '.data.subgraphs[0].currentVersion.deployment.synced') \
   != true ]]; \
   do sleep 5; done
-echo "subgraph is synced"
+echo "subgraph is done indexing"
 
 
 if [[ $devmode != 1 ]]; then
@@ -97,8 +102,6 @@ if [[ $devmode != 1 ]]; then
   docker-compose down -v
   # tag on github
   echo "create tag ${image_version}"
-  # git add migration.json
-  # git commit `release of version $image_name:$image_version`
   git tag -a $image_version -m "Release of version $image_name:$image_version"
   git push --tags
   # done
