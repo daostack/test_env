@@ -5,11 +5,11 @@ set -e # exit on error
 while getopts "h?dfs" opt; do
     case "$opt" in
       h|\?)
-        echo "create and publish a new release. Pass the option -d to run without restarting and publishing in th docker containers"
+        echo "create and publish a new release. Pass the option -d (for 'devmode') to run without restarting docker or publishing on docker hub"
         exit 0
         ;;
       d)  devmode=1
-        echo "running in devmode"
+        echo "running in devmode, will not restart docker containers or publish the images in docker hub"
         ;;
       f)  output_file=$OPTARG
         ;;
@@ -72,6 +72,9 @@ while [[ $(curl --silent -H "Content-Type: application/json" -d '{"query":"{ sub
   do sleep 5; done
 echo "subgraph is done indexing"
 
+
+echo "publish new docker images"
+echo "Image name: $image_name:$image_version"
 
 if [[ $devmode != 1 ]]; then
   echo "publish new docker images"

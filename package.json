@@ -1,6 +1,6 @@
 {
   "name": "@daostack/test-env",
-  "version": "3.0.15",
+  "version": "3.0.16",
   "description": "Testing environment for DAOstack projects.",
   "main": "index.js",
   "scripts": {
@@ -23,8 +23,8 @@
   },
   "homepage": "https://github.com/daostack/test_env#readme",
   "dependencies": {
-    "@daostack/migration": "0.0.1-rc.31-v0",
-    "@daostack/subgraph": "0.0.31-0",
+    "@daostack/migration": "0.0.1-rc.32-v0",
+    "@daostack/subgraph": "0.0.32-0",
     "ipfs-http-client": "^32.0.1",
     "yaeti": "^1.0.2"
   },
