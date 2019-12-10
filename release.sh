@@ -9,7 +9,7 @@ while getopts "h?dfs" opt; do
         exit 0
         ;;
       d)  devmode=1
-        echo "running in devmode, will not restart docker containers or publish the images in docker hub"
+        echo "running in devmode, will not publish the images in docker hub"
         ;;
       f)  output_file=$OPTARG
         ;;

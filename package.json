@@ -23,8 +23,8 @@
   },
   "homepage": "https://github.com/daostack/test_env#readme",
   "dependencies": {
-    "@daostack/migration": "0.0.1-rc.32-v0",
-    "@daostack/subgraph": "0.0.32-0",
+    "@daostack/migration": "0.0.1-rc.36-v1",
+    "@daostack/subgraph": "0.0.35-0",
     "ipfs-http-client": "^32.0.1",
     "yaeti": "^1.0.2"
   },

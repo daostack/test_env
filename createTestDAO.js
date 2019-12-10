@@ -230,7 +230,6 @@ async function migrateDemoDao (orgName, tokenName, tokenSymbol, founders, tokenD
     founders,
     tokenDist,
     repDist,
-    UController,
     cap
   )
 
