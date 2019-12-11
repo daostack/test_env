@@ -7,6 +7,9 @@
     "release": "./release.sh",
     "deploy-ethereum": "node ./deployEthereum.js",
     "deploy-subgraph": "node ./deploySubgraph.js",
+    "deploy-testdao": "node ./createTestDAO.js",
+    "deploy-necdao": "node ./createNecDAO.js",
+    "deploy-dutchdao": "node ./createDutchXDAO.js",
     "migrate": "npm run deploy-subgraph"
   },
   "repository": {

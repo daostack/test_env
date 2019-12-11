@@ -19,10 +19,12 @@ const options = {
   // const arcVersion = require('./package.json').dependencies['@daostack/arc']
   const VERSION = require('@daostack/arc/package.json').version;
 
+  /**
+   * CREATE DUTCHX DAO
+   */
   console.log(`Creating DutchX DAO`);
   const { createDutchXDAO } = require('./createDutchXDAO');
   const dutchXCreateInfo = await createDutchXDAO(options);
-  // write data to the daos directory where the subgraph deployment can find it
 
   const dutchXDAOInfo = dutchXCreateInfo['dao'][VERSION];
   if (dutchXDAOInfo.name !== 'DutchX DAO') {
@@ -30,28 +32,13 @@ const options = {
     throw Error(msg);
   }
   dutchXDAOInfo.arcVersion = VERSION;
+  // write data to the daos directory where the subgraph deployment can find it
   await fs.writeFileSync(path.normalize(path.join(__dirname, 'node_modules/@daostack/subgraph/daos/private/dutchxdao.json')), JSON.stringify(dutchXDAOInfo, null, 4));
   console.log(`Done creating DutchX DAO`);
 
-  console.log(`Creating Test DAO`);
-  const createTestDAO = require('./createTestDAO');
-  let migration = (await DAOstackMigration.migrateScript(createTestDAO)(options));
-
-  migration = migration.test[arcVersion];
-
-  const testDAOInfo = {
-      name: migration.name,
-      Avatar: migration.Avatar,
-      DAOToken: migration.DAOToken,
-      Reputation: migration.Reputation,
-      Controller: migration.Controller,
-      Schemes: migration.Schemes,
-      arcVersion
-  };
-  // write data to the daos directory where the subgraph deployment can find it
-  await fs.writeFileSync(path.normalize(path.join(__dirname, 'node_modules/@daostack/subgraph/daos/private/test.json')), JSON.stringify(testDAOInfo, null, 4));
-  console.log(`Done creating Test DAO`);
-
+  /**
+   * CREATE NECTAR DAO
+   */
   console.log(`Creating Nectar DAO`);
   const { createNectarDAO } = require('./createNecDAO');
   const migrationInfo = await createNectarDAO(options);
@@ -65,6 +52,30 @@ const options = {
   nectarDAOInfo.arcVersion = VERSION;
   await fs.writeFileSync(path.normalize(path.join(__dirname, 'node_modules/@daostack/subgraph/daos/private/nectardao.json')), JSON.stringify(nectarDAOInfo, null, 4));
   console.log(`Done creating Nectar DAO`);
+
+  /**
+   * CREATE TEST DAO
+   */
+  console.log(`Creating Test DAO`);
+  const createTestDAO = require('./createTestDAO');
+  let testDAOInfo = createTestDAO(options);
+
+  // migration = migration.test[arcVersion];
+
+  // const testDAOInfo = {
+  //     name: migration.name,
+  //     Avatar: migration.Avatar,
+  //     DAOToken: migration.DAOToken,
+  //     Reputation: migration.Reputation,
+  //     Controller: migration.Controller,
+  //     Schemes: migration.Schemes,
+  //     arcVersion
+  // };
+  // write data to the daos directory where the subgraph deployment can find it
+  await fs.writeFileSync(path.normalize(path.join(__dirname, 'node_modules/@daostack/subgraph/daos/private/test.json')), JSON.stringify(testDAOInfo, null, 4));
+  console.log(`Done creating Test DAO`);
+
+
 }
 
 deployDaos().catch((err) => { console.error(err); process.exit(1);});
