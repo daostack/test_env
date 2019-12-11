@@ -16,10 +16,18 @@ const options = {
 };
 
  async function deployDaos() {
-  const DAOstackMigration = require('@daostack/migration');
-  // const arcVersion = require('./package.json').dependencies['@daostack/arc']
-  const VERSION = require('@daostack/arc/package.json').version;
+  // const DAOstackMigration = require('@daostack/migration');
 
+
+  /**
+   * CREATE TEST DAO
+   */
+  console.log(`Creating Test DAO`);
+  const createTestDAO = require('./createTestDAO');
+  let testmigrationDAOInfo = await createTestDAO(options);
+  const testDAOInfo = testmigrationDAOInfo['dao'][options.arcVersion];
+  await fs.writeFileSync(path.normalize(path.join(__dirname, 'node_modules/@daostack/subgraph/daos/private/testdao.json')), JSON.stringify(testDAOInfo, null, 4));
+  console.log(`Done creating Test DAO`);
   /**
    * CREATE DUTCHX DAO
    */
@@ -33,7 +41,7 @@ const options = {
     let msg = `Unexpected DAO name: expected "DutchX DAO", found ${dutchXDAOInfo.name}; perhaps you specified the wrong version (in the code ehre above?)`;
     throw Error(msg);
   }
-  dutchXDAOInfo.arcVersion = VERSION;
+  // dutchXDAOInfo.arcVersion = VERSION;
   // write data to the daos directory where the subgraph deployment can find it
   await fs.writeFileSync(path.normalize(path.join(__dirname, 'node_modules/@daostack/subgraph/daos/private/dutchxdao.json')), JSON.stringify(dutchXDAOInfo, null, 4));
   console.log(`Done creating DutchX DAO`);
@@ -55,17 +63,12 @@ const options = {
   await fs.writeFileSync(path.normalize(path.join(__dirname, 'node_modules/@daostack/subgraph/daos/private/nectardao.json')), JSON.stringify(nectarDAOInfo, null, 4));
   console.log(`Done creating Nectar DAO`);
 
-  /**
-   * CREATE TEST DAO
-   */
-  console.log(`Creating Test DAO`);
-  const createTestDAO = require('./createTestDAO');
-  let testmigrationDAOInfo = createTestDAO(options);
-  const testDAOInfo = migrationInfo['dao'][options.arcVersion];
-  await fs.writeFileSync(path.normalize(path.join(__dirname, 'node_modules/@daostack/subgraph/daos/private/test.json')), JSON.stringify(testDAOInfo, null, 4));
-  console.log(`Done creating Test DAO`);
+
 
 
 }
+if (require.main === module) {
+  deployDaos().catch((err) => { console.error(err); process.exit(1);});
+}
 
-deployDaos().catch((err) => { console.error(err); process.exit(1);});
+module.exports = { options }
