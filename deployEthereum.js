@@ -1,7 +1,8 @@
 const fs = require('fs');
 const path = require('path');
-
+const VERSION = '0.0.1-rc.32'
 const options = {
+  arcVersion: '0.0.1-rc.32',
   quiet: false,
   disableconfs: false,
   force: true,
@@ -26,7 +27,8 @@ const options = {
   const { createDutchXDAO } = require('./createDutchXDAO');
   const dutchXCreateInfo = await createDutchXDAO(options);
 
-  const dutchXDAOInfo = dutchXCreateInfo['dao'][VERSION];
+  console.log(dutchXCreateInfo)
+  const dutchXDAOInfo = dutchXCreateInfo['dao'][options.arcVersion];
   if (dutchXDAOInfo.name !== 'DutchX DAO') {
     let msg = `Unexpected DAO name: expected "DutchX DAO", found ${dutchXDAOInfo.name}; perhaps you specified the wrong version (in the code ehre above?)`;
     throw Error(msg);
@@ -44,7 +46,7 @@ const options = {
   const migrationInfo = await createNectarDAO(options);
   // write data to the daos directory where the subgraph deployment can find it
 
-  const nectarDAOInfo = migrationInfo['dao'][VERSION];
+  const nectarDAOInfo = migrationInfo['dao'][options.arcVersion];
   if (nectarDAOInfo.name !== 'Nectar DAO') {
     let msg = `Unexpected DAO name: expected "Nectar DAO", found ${nectarDAOInfo.name}; perhaps you specified the wrong version (in the code ehre above?)`;
     throw Error(msg);
@@ -58,20 +60,8 @@ const options = {
    */
   console.log(`Creating Test DAO`);
   const createTestDAO = require('./createTestDAO');
-  let testDAOInfo = createTestDAO(options);
-
-  // migration = migration.test[arcVersion];
-
-  // const testDAOInfo = {
-  //     name: migration.name,
-  //     Avatar: migration.Avatar,
-  //     DAOToken: migration.DAOToken,
-  //     Reputation: migration.Reputation,
-  //     Controller: migration.Controller,
-  //     Schemes: migration.Schemes,
-  //     arcVersion
-  // };
-  // write data to the daos directory where the subgraph deployment can find it
+  let testmigrationDAOInfo = createTestDAO(options);
+  const testDAOInfo = migrationInfo['dao'][options.arcVersion];
   await fs.writeFileSync(path.normalize(path.join(__dirname, 'node_modules/@daostack/subgraph/daos/private/test.json')), JSON.stringify(testDAOInfo, null, 4));
   console.log(`Done creating Test DAO`);
 
