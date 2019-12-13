@@ -32,8 +32,8 @@ fi
 
 echo "Starting fresh docker containers..."
 set -x # echo on
-# docker-compose down -v
-# docker-compose up -d
+docker-compose down -v
+docker-compose up -d
 
 
 set +x
@@ -56,7 +56,7 @@ set -x
 # echo pwd
 
 # # Workaround for the fact that `deploySubgraph.js` does not work with the current package
-# this workaround requires that we write all artefacts (in deployEthereum) in the node_modules package, which is not so nice :-/
+# this workaround requires that we write all artefacts (like the info of the daos created in deployEthereum) in the node_modules package, which is not so nice :-/
 cd node_modules/@daostack/subgraph
 # if [[ $skip_install != 1 ]]; then
 #   rm -rf node_modules # must do this to workaround a bug
