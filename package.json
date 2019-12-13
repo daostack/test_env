@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "release": "./release.sh",
-    "deploy-ethereum": "node ./deployEthereum.js",
-    "deploy-subgraph": "node ./deploySubgraph.js",
-    "deploy-testdao": "node ./createTestDAO.js",
-    "deploy-necdao": "node ./createNecDAO.js",
-    "deploy-dutchdao": "node ./createDutchXDAO.js",
-    "migrate": "npm run deploy-subgraph"
+    "deployEthereum": "node ./deployEthereum.js",
+    "deploySubgraph": "node ./deploySubgraph.js",
+    "deployTestdao": "node ./createTestDAO.js",
+    "deployNecdao": "node ./createNecDAO.js",
+    "deployDutchdao": "node ./createDutchXDAO.js",
+    "postinstall": "cd node_modules/@daostack/subgraph && npm install"
   },
   "repository": {
     "type": "git",
@@ -27,7 +27,7 @@
   "homepage": "https://github.com/daostack/test_env#readme",
   "dependencies": {
     "@daostack/migration": "0.0.1-rc.36-v1",
-    "@daostack/subgraph": "0.0.35-0",
+    "@daostack/subgraph": "0.0.36-2",
     "ipfs-http-client": "^32.0.1",
     "yaeti": "^1.0.2"
   },

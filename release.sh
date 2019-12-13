@@ -32,8 +32,8 @@ fi
 
 echo "Starting fresh docker containers..."
 set -x # echo on
-docker-compose down -v
-docker-compose up -d
+# docker-compose down -v
+# docker-compose up -d
 
 
 set +x
@@ -42,27 +42,31 @@ while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8545)" != "400" ]
 set -x
 
 
-# copy the migration file from the migration repo
 echo "deploying ethereum contracts and doing transactions...."
 # clean up local environment
-rm -f migration.json
-docker-compose exec  ganache cat migration.json > migration.json
-npm run deploy-ethereum
-
-cd node_modules/@daostack/subgraph
-rm -rf node_modules # must do this to workaround a bug
-if [[ $skip_install != 1 ]]; then
-  npm i
-fi
+# rm -f migration.json
+# docker-compose exec  ganache cat migration.json > migration.json
+# npm run deployEthereum
 
 echo "waiting for graph-node to start"
 set +x
 while [[ ! "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8000)" =~ ^(200|302)$ ]]; do sleep 5; done
 set -x
-npm run deploy
 
+# echo pwd
+
+# # Workaround for the fact that `deploySubgraph.js` does not work with the current package
+# this workaround requires that we write all artefacts (in deployEthereum) in the node_modules package, which is not so nice :-/
+cd node_modules/@daostack/subgraph
+# if [[ $skip_install != 1 ]]; then
+#   rm -rf node_modules # must do this to workaround a bug
+#   npm i
+# fi
+npm run deploy
 cd ../../../
-echo pwd
+
+
+# npm run deploySubgraph
 
 set +x
 echo "waiting for subgraph to finish indexing"

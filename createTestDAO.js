@@ -7,18 +7,12 @@ const opts = {}
 
 
 
-// async function assignGlobalVariables (web3, spinner, opts, logTx, previousMigration) {
-//   this.arcVersion = require('@daostack/arc/package.json').version
-//   this.web3 = web3
-//   this.spinner = spinner
-//   this.opts = opts
-//   this.logTx = logTx
-//   this.base = previousMigration.base[this.arcVersion]
-// }
-
 async function createTestDAO(options) {
-  options.params = require('./testdao-params.json')
- console.log(require(options.prevmigration).private.test[options.arcVersion])
+
+  const arcVersion = '0.0.1-rc.32'
+  // get the params suitable for v32
+  options.arcVersion = arcVersion
+  options.params = require('./testdao-params-v32.json')
   const result = await migrateDAO(options)
 
   const daoInfo = result.dao[options.arcVersion]
