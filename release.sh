@@ -19,7 +19,7 @@ while getopts "h?dfs" opt; do
     esac
 done
 
-migration_version=$(cat package.json  | jq -r '.dependencies."@daostack/migration"')
+migration_version=$(cat node_modules/@daostack/subgraph/package.json  | jq -r '.devDependencies."@daostack/migration"')
 docker_compose_migration_version=$(cat docker-compose.yml | grep daostack/migration | cut -d ":" -f 3 | sed "s/'//")
 package_version=$(cat package.json | jq -r '.version')
 image_version=$migration_version-$package_version
@@ -46,7 +46,7 @@ echo "deploying ethereum contracts and doing transactions...."
 # clean up local environment
 # rm -f migration.json
 # docker-compose exec  ganache cat migration.json > migration.json
-# npm run deployEthereum
+npm run deployEthereum
 
 echo "waiting for graph-node to start"
 set +x

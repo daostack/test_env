@@ -28,13 +28,14 @@ async function deployDaos() {
   /**
    * CREATE TEST DAO
    */
-  console.log(`Creating Test DAO`);
-  const createTestDAO = require('./createTestDAO');
-  let testmigrationDAOInfo = await createTestDAO(options);
-  const testDAOInfo = testmigrationDAOInfo['dao'][options.arcVersion];
-  // do not save a `testdao.json` as that name is already taken..
-  await fs.writeFileSync(path.join(DAOS_DIR, 'testdao2.json'), JSON.stringify(testDAOInfo, null, 4));
-  console.log(`Done creating Test DAO`);
+  // THIS CODE bREAKS THE SUBGRAPH (v36-2)
+  // console.log(`Creating Test DAO`);
+  // const createTestDAO = require('./createTestDAO');
+  // let testmigrationDAOInfo = await createTestDAO(options);
+  // const testDAOInfo = testmigrationDAOInfo['dao'][options.arcVersion];
+  // // do not save a `testdao.json` as that name is already taken..
+  // await fs.writeFileSync(path.join(DAOS_DIR, 'testdao2.json'), JSON.stringify(testDAOInfo, null, 4));
+  // console.log(`Done creating Test DAO`);
   /**
    * CREATE DUTCHX DAO
    */
