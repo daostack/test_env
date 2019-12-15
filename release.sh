@@ -44,8 +44,8 @@ set -x
 
 echo "deploying ethereum contracts and doing transactions...."
 # clean up local environment
-# rm -f migration.json
-# docker-compose exec  ganache cat migration.json > migration.json
+rm -f migration.json
+docker-compose exec  ganache cat migration.json > migration.json
 npm run deployEthereum
 
 echo "waiting for graph-node to start"
