@@ -1,7 +1,7 @@
 {
-  "orgName": "Nectar DAO",
-  "tokenName": "Nectar DAO Token",
-  "tokenSymbol": "NDT",
+  "orgName": "DAO For Testing",
+  "tokenName": "DAO For Testing Token",
+  "tokenSymbol": "DxFT",
   "ContributionReward": [
     {
       "voteParams": 0
@@ -118,7 +118,7 @@
           "StandAloneContract": 1
         },
         "0x0000000000000000000000000000000000000001",
-        "0x0000000000000000000000000000000000000000"
+        "0x0000000000000000000000000000000000000001"
       ],
       "alias": "ReputationFromToken",
       "fromArc": true,
