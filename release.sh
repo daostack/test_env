@@ -46,6 +46,7 @@ echo "deploying ethereum contracts and doing transactions...."
 # clean up local environment
 rm -f migration.json
 docker-compose exec  ganache cat migration.json > migration.json
+
 npm run deployEthereum
 
 echo "waiting for graph-node to start"
@@ -64,9 +65,9 @@ cd node_modules/@daostack/subgraph
 # fi
 npm run deploy
 cd ../../../
-
-
 # npm run deploySubgraph
+
+
 
 set +x
 echo "waiting for subgraph to finish indexing"
