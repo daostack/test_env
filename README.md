@@ -1,18 +1,67 @@
 # test_env
 
-Test environment setup. This repository is used to create docker images that can be used for testing the DAOstack stack, for example in  `@daostack/client` and `@doastack/alchemy`
+This repository is used to create docker images that can be used for testing the DAOstack stack, for example in  `@daostack/client` and `@doastack/alchemy`
 
 # The test environment
 
 
-The test environment consists of 3 (strictly related) docker images:
+The test environment consists of 3 (related) docker images:
 
-The images created with the code in this repo can be found at:
 * https://hub.docker.com/r/daostack/test-env : an image with ganache with a large number of deployed contracts
-* https://hub.docker.com/r/daostack/subgraph-postgres : a postgres image to use with graph-node, that contains a subgraph called `daostack` that indexes the contracts in the `test_env` image
 * https://hub.docker.com/r/daostack/subgraph-ipfs : an ipfs image which contains the proposal data and the subgraph definition
+* https://hub.docker.com/r/daostack/subgraph-postgres : a postgres image to use with graph-node, that contains the data of a subgraph called `daostack` that indexes the contracts in the `test_env` image
 
-These images can be used as in the examples https://github.com/daostack/client/blob/master/docker-compose.yml and https://github.com/daostack/alchemy/blob/master/docker-compose.yml
+## Using the package
+
+
+These setups look like this:
+(for updated examples refer to https://github.com/daostack/client/blob/master/docker-compose.yml and https://github.com/daostack/alchemy/blob/master/docker-compose.yml)
+
+1. Create a file named `docker-compose.yml` with the contents below
+2. Run `docker-compose up graph-node`
+3. Visit the subgraph at 
+
+```
+version: "3"
+services:
+  graph-node:
+    image: 'graphprotocol/graph-node@sha256:8af6adc44d6c55eaed7f6d3ac2b96af0823044e94ffee380288f07e96d5ff30b'
+    ports:
+      - 8000:8000
+      - 8001:8001
+      - 8020:8020
+    links:
+      - ipfs
+      - postgres
+      - ganache
+    environment:
+      postgres_host: postgres:5432
+      postgres_user: postgres
+      postgres_pass: 'letmein'
+      postgres_db: postgres
+      ipfs: ipfs:5001
+      ethereum: private:http://ganache:8545
+      GRAPH_LOG: "graph.log"
+      GRAPH_GRAPHQL_MAX_FIRST: 1000
+
+  ipfs:
+    image: daostack/subgraph-ipfs:0.0.1-rc.36-v1-3.0.19
+    ports:
+      - 5001:5001
+
+  postgres:
+    image: daostack/subgraph-postgres:0.0.1-rc.36-v1-3.0.19
+    ports:
+      - 9432:5432
+    environment:
+      POSTGRES_PASSWORD: 'letmein'
+
+  ganache:
+    image: daostack/test-env:0.0.1-rc.36-v1-3.0.19
+    ports:
+      - 8545:8545
+```
+
 
 ## What you need
 
