@@ -1,10 +1,11 @@
 const fs = require('fs');
 const path = require('path');
+const { migrateDAO } = require('@daostack/migration')
 const VERSION = '0.0.1-rc.32'
 
-// options passed to the DAOCreator scripts
+// default options passed to the DAOCreator scripts
 const options = {
-  arcVersion: VERSION,
+  // arcVersion: VERSION,
   quiet: false,
   disableconfs: false,
   force: true,
@@ -23,7 +24,46 @@ const options = {
 const DAOS_DIR = path.resolve('./node_modules/@daostack/subgraph/daos/private')
 
 async function deployDaos() {
-  // const DAOstackMigration = require('@daostack/migration');
+  let migrationInfo, daoInfo, expectedName
+
+  /**
+   * CREATE NECTAR DAO rc.32
+   */
+  expectedName = 'Nectar DAO'
+  console.log(`Creating Nectar DAO - version rc.32`);
+  options.arcVersion = '0.0.1-rc.32'
+  options.params = require('./nectardao-params-v32.json')
+  migrationInfo = await migrateDAO(options)
+  // do a sanity check 
+  daoInfo = migrationInfo['dao'][options.arcVersion];
+  if (daoInfo.name !== expectedName) {
+    let msg = `Unexpected DAO name: expected "${expectedName}", found ${daoInfo.name}; perhaps you specified the wrong version (in the code ehre above?)`;
+    throw Error(msg);
+  }
+  await fs.writeFileSync(path.join(DAOS_DIR, 'nectardao.json'), JSON.stringify(daoInfo, null, 4));
+  console.log(`Done creating Nectar DAO`);
+
+
+
+
+  /**
+   * CREATE NECTAR DAO rc.34
+   */
+  expectedName = 'Nectar DAO rc.34'
+  console.log(`Creating ${expectedName}`);
+  options.arcVersion = '0.0.1-rc.34'
+  options.params = require('./nectardao-params-rc.34.json')
+  migrationInfo = await migrateDAO(options)
+  daoInfo = migrationInfo['dao'][options.arcVersion];
+  
+  // do a sanity check just 
+  if (daoInfo.name !== expectedName) {
+    let msg = `Unexpected DAO name: expected "${expectedName}", found ${daoInfo.name}; perhaps you specified the wrong version (in the code ehre above?)`;
+    throw Error(msg);
+  }
+  await fs.writeFileSync(path.join(DAOS_DIR, 'nectardao-rc.34.json'), JSON.stringify(daoInfo, null, 4));
+  console.log(`Done creating ${expectedName}`);
+
 
 
   /**
@@ -55,25 +95,6 @@ async function deployDaos() {
   // await fs.writeFileSync(path.normalize(path.join(__dirname, 'node_modules/@daostack/subgraph/daos/private/dutchxdao.json')), JSON.stringify(dutchXDAOInfo, null, 4));
   await fs.writeFileSync(path.join(DAOS_DIR, 'dutchxdao.json'), JSON.stringify(dutchXDAOInfo, null, 4));
   console.log(`Done creating DutchX DAO`);
-
-  /**
-   * CREATE NECTAR DAO
-   */
-  console.log(`Creating Nectar DAO`);
-  const { createNectarDAO } = require('./createNecDAO');
-  const migrationInfo = await createNectarDAO(options);
-  // write data to the daos directory where the subgraph deployment can find it
-
-  const nectarDAOInfo = migrationInfo['dao'][options.arcVersion];
-  if (nectarDAOInfo.name !== 'Nectar DAO') {
-    let msg = `Unexpected DAO name: expected "Nectar DAO", found ${nectarDAOInfo.name}; perhaps you specified the wrong version (in the code ehre above?)`;
-    throw Error(msg);
-  }
-  nectarDAOInfo.arcVersion = VERSION;
-  await fs.writeFileSync(path.join(DAOS_DIR, 'nectardao.json'), JSON.stringify(nectarDAOInfo, null, 4));
-  console.log(`Done creating Nectar DAO`);
-
-
 
 
 }
