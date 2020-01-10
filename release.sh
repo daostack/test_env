@@ -22,7 +22,7 @@ done
 migration_version=$(cat node_modules/@daostack/subgraph/package.json  | jq -r '.devDependencies."@daostack/migration"')
 docker_compose_migration_version=$(cat docker-compose.yml | grep daostack/migration | cut -d ":" -f 3 | sed "s/'//")
 package_version=$(cat package.json | jq -r '.version')
-image_version=$migration_version-$package_version
+image_version=$package_version
 
 # check if config is ok
 if [[ $docker_compose_migration_version != $migration_version ]]; then
@@ -79,13 +79,13 @@ echo "subgraph is done indexing"
 
 
 echo "publish new docker images"
-echo "Image name: $image_name:$image_version"
+echo "Image version: $image_version"
 
 if [[ $devmode != 1 ]]; then
   echo "publish new docker images"
   # commit the ganache image
   container_id=$(docker ps  -f "name=ganache" -l -q)
-  image_name=daostack/test-env
+  image_name=daostack/test-env-ganache
   echo "docker commit $container_id $image_name:$image_version"
   docker commit $container_id $image_name:$image_version
   echo "docker push $image_name:$image_version"
@@ -93,7 +93,7 @@ if [[ $devmode != 1 ]]; then
 
   # commit the postgres image
   container_id=$(docker ps  -f "name=postgres" -l -q)
-  image_name=daostack/subgraph-postgres
+  image_name=daostack/test-env-postgres
   echo "docker commit $container_id $image_name:$image_version"
   docker commit $container_id $image_name:$image_version
   echo "docker push $image_name:$image_version"
@@ -101,7 +101,7 @@ if [[ $devmode != 1 ]]; then
 
   # commit the ipfs  image
   container_id=$(docker ps  -f "name=ipfs" -l -q)
-  image_name=daostack/subgraph-ipfs
+  image_name=daostack/test-env-ipfs
   echo "docker commit $container_id $image_name:$image_version"
   docker commit $container_id $image_name:$image_version
   echo "docker push $image_name:$image_version"
