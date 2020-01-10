@@ -81,6 +81,7 @@ async function deployDaos() {
    * CREATE DUTCHX DAO
    */
   console.log(`Creating DutchX DAO`);
+  options.arcVersion = '0.0.1-rc.32'
   const { createDutchXDAO } = require('./createDutchXDAO');
   const dutchXCreateInfo = await createDutchXDAO(options);
 
