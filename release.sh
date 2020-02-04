@@ -78,9 +78,11 @@ while [[ $(curl --silent -H "Content-Type: application/json" -d '{"query":"{ sub
 echo "subgraph is done indexing"
 
 
-echo "publish new docker images"
 echo "Image version: $image_version"
 
+if [[ $devmode == 1 ]]; then
+  echo "we are in devmode, so we are not published the new images to docker hub"
+fi
 if [[ $devmode != 1 ]]; then
   echo "publish new docker images"
   # commit the ganache image
