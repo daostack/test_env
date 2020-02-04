@@ -26,7 +26,7 @@ image_version=$package_version
 
 # check if config is ok
 if [[ $docker_compose_migration_version != $migration_version ]]; then
-  echo "The migration version in the docker-compose file is not the same as the one in package.json ($docker_compose_migration_version != $migration_version)"
+  echo "The migration version in the docker-compose file is not the same as the one in package.json of the subgraph dependency ($docker_compose_migration_version != $migration_version)"
   exit
 fi
 
