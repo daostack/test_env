@@ -81,20 +81,18 @@ services:
 `./release.sh -d` will run the script in development mode, which will run all the steps except publish the ersult on docker hub
 
 
-## Instructions to createa  a new release
+## Instructions
 
 Create and release new images for a new [Arc](https://github.com/daostack/arc/)/[subgraph](https://github.com/daostack/subgraph/) combo.
 
 - find the latest subgraph relase: https://www.npmjs.com/package/@daostack/subgraph
 - find the corresponding package versions  for `@daostack/arc` and `@daostack/migration` in https://github.com/daostack/subgraph/blob/master/package-lock.json
 - edit `package.json` and update the `@daostack/subgraph`, `@daostack/migration` and `daostack/arc` dependencies
-- edit `package.json` and update the release number
 - run `npm install`
 - edit `docker-compose.yml` and update the `graphprotocl/graph-node` and the `daostack/migration` image. This image already has the DAOStack base contracts deployed
-- now run `./release.sh` that will create a new release and push it to docker hub (if you have the credentials)
-
-You can _test_ the release script by running `./release.sh -d`, which will not push any images, and will keep the subgraph running on port `8000`.
-
+- (re)-start the docker containers: `docker-compose up graph-node`. You will now have a graph server running on `http://127.0.0.1:8000`, but it will not have any subgraphs deployed to it yet.
+- `npm run migrate` deploy some DAOs and other contracts (in addition to those already available from the `@daostack/migration` image. If the `Arc` version has changed, this script may break. If so, fix it.
+- `npm run deploySubgraph`: will generate and deploy the subgraph.  `http://127.0.0.1:8000`
 
 
 ## available accounts
