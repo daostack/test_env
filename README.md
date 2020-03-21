@@ -19,7 +19,7 @@ These setups look like this:
 
 1. Create a file named `docker-compose.yml` with the contents below
 2. Run `docker-compose up graph-node`
-3. Visit the subgraph at 
+3. Visit the subgraph at
 
 ```
 version: "3"
@@ -86,10 +86,10 @@ services:
 Create and release new images for a new [Arc](https://github.com/daostack/arc/)/[subgraph](https://github.com/daostack/subgraph/) combo.
 
 - find the latest subgraph relase: https://www.npmjs.com/package/@daostack/subgraph
-- find the corresponding package versions  for `@daostack/arc` and `@daostack/migration` in https://github.com/daostack/subgraph/blob/master/package-lock.json
-- edit `package.json` and update the `@daostack/subgraph`, `@daostack/migration` and `daostack/arc` dependencies
+- find the corresponding package versions for `@daostack/migration` in https://github.com/daostack/subgraph/blob/master/package-lock.json
+- edit `package.json` and update the `@daostack/subgraph` and `@daostack/migration` dependencies
 - run `npm install`
-- edit `docker-compose.yml` and update the `graphprotocl/graph-node` and the `daostack/migration` image. This image already has the DAOStack base contracts deployed
+- edit `docker-compose.yml` and update the `graphprotocl/graph-node` (to match what is in the subgraph package.json) and the `daostack/migration` image. This image already has the DAOStack base contracts deployed
 - (re)-start the docker containers: `docker-compose up graph-node`. You will now have a graph server running on `http://127.0.0.1:8000`, but it will not have any subgraphs deployed to it yet.
 - `npm run migrate` deploy some DAOs and other contracts (in addition to those already available from the `@daostack/migration` image. If the `Arc` version has changed, this script may break. If so, fix it.
 - `npm run deploySubgraph`: will generate and deploy the subgraph.  `http://127.0.0.1:8000`
