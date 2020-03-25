@@ -1,6 +1,6 @@
 {
   "name": "@daostack/test-env",
-  "version": "3.0.31",
+  "version": "3.0.32",
   "description": "Testing environment for DAOstack projects.",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "deployTestdao": "node ./createTestDAO.js",
     "deployNecdao": "node ./createNecDAO.js",
     "deployDutchdao": "node ./createDutchXDAO.js",
-    "postinstall": "cd node_modules/@daostack/subgraph && npm install"
+    "postinstall": "cd node_modules/@daostack/subgraph && rm -rf node_modules && npm install"
   },
   "repository": {
     "type": "git",
