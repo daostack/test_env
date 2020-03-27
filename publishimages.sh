@@ -1,4 +1,4 @@
-migration_version=$(cat package.json  | jq -r '.dependencies."@daostack/migration"')
+migration_version=$(cat package.json  | jq -r '.dependencies."@daostack/migration-experimental"')
 package_version=$(cat package.json | jq -r '.version')
 image_version=$migration_version-$package_version
 docker-compose up -d

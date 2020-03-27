@@ -19,7 +19,7 @@ while getopts "h?dfs" opt; do
     esac
 done
 
-migration_version=$(cat node_modules/@daostack/subgraph/package.json  | jq -r '.devDependencies."@daostack/migration"')
+migration_version=$(cat node_modules/@daostack/subgraph-experimental/package.json  | jq -r '.devDependencies."@daostack/migration-experimental"')
 docker_compose_migration_version=$(cat docker-compose.yml | grep daostack/migration | cut -d ":" -f 3 | sed "s/'//")
 package_version=$(cat package.json | jq -r '.version')
 image_version=$package_version
@@ -34,7 +34,6 @@ echo "Starting fresh docker containers..."
 set -x # echo on
 docker-compose down -v
 docker-compose up -d
-
 
 set +x
 echo "waiting for ganache to start"
@@ -54,20 +53,13 @@ set +x
 while [[ ! "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8000)" =~ ^(200|302)$ ]]; do sleep 5; done
 set -x
 
-# echo pwd
-
-# # Workaround for the fact that `deploySubgraph.js` does not work with the current package
-# this workaround requires that we write all artefacts (like the info of the daos created in deployEthereum) in the node_modules package, which is not so nice :-/
-cd node_modules/@daostack/subgraph
-# if [[ $skip_install != 1 ]]; then
-#   rm -rf node_modules # must do this to workaround a bug
-#   npm i
-# fi
-npm run deploy
-cd ../../../
-# npm run deploySubgraph
-
-
+if [[ $skip_install != 1 ]]; then
+  cd node_modules/@daostack/subgraph-experimental
+  rm -rf node_modules # must do this to workaround a bug
+  npm i
+  cd ../../../
+fi
+npm run deploy-subgraph
 
 set +x
 echo "waiting for subgraph to finish indexing"
@@ -77,12 +69,12 @@ while [[ $(curl --silent -H "Content-Type: application/json" -d '{"query":"{ sub
   do sleep 5; done
 echo "subgraph is done indexing"
 
-
 echo "Image version: $image_version"
 
 if [[ $devmode == 1 ]]; then
   echo "we are in devmode, so we are not published the new images to docker hub"
 fi
+
 if [[ $devmode != 1 ]]; then
   echo "publish new docker images"
   # commit the ganache image

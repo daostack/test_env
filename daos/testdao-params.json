@@ -1,7 +1,7 @@
 {
-  "orgName": "Nectar DAO rc.34",
-  "tokenName": "Nectar DAO Token",
-  "tokenSymbol": "NDT",
+  "orgName": "DAO For Testing",
+  "tokenName": "DAO For Testing Token",
+  "tokenSymbol": "DxFT",
   "ContributionReward": [
     {
       "voteParams": 0
@@ -173,9 +173,6 @@
     "ContributionReward": true,
     "SchemeRegistrar": true
   },
-  "unregisterOwner": true,
-  "useUController": false,
-  "useDaoCreator": true,
   "founders": [
     {
       "address": "0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1",
