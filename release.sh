@@ -46,7 +46,7 @@ echo "deploying ethereum contracts and doing transactions...."
 rm -f migration.json
 docker-compose exec  ganache cat migration.json > migration.json
 
-npm run deployEthereum
+npm run deploy-daos
 
 echo "waiting for graph-node to start"
 set +x
