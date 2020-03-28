@@ -2,43 +2,6 @@
   "orgName": "DutchX DAO",
   "tokenName": "DutchX DAO Token",
   "tokenSymbol": "DDT",
-  "ContributionReward": [
-    {
-      "voteParams": 0
-    }
-  ],
-  "SchemeRegistrar": [
-    {
-      "voteRegisterParams": 1,
-      "voteRemoveParams": 1
-    }
-  ],
-  "StandAloneContracts": [
-    {
-      "name": "Reputation",
-      "fromArc": true
-    },
-    {
-      "name": "Wallet",
-      "fromArc": true
-    }
-  ],
-  "CustomSchemes": [
-    {
-      "name": "GenericScheme",
-      "schemeName": "GenericScheme",
-      "params": [
-        "GenesisProtocolAddress",
-        {
-          "voteParams": 1
-        },
-        "0xb279182d99e65703f0076e4812653aab85fca0f0"
-      ],
-      "permissions": "0x00000010",
-      "alias": "GenericSchemeDutchX",
-      "fromArc": true
-    }
-  ],
   "VotingMachinesParams": [
     {
       "boostedVotePeriodLimit": 1800,
@@ -83,13 +46,46 @@
       "activationTime": 1570021200
     }
   ],
-  "schemes": {
-    "ContributionReward": true,
-    "SchemeRegistrar": true
-  },
-  "unregisterOwner": true,
-  "useUController": false,
-  "useDaoCreator": true,
+  "Schemes": [ 
+    {
+      "name": "ContributionReward",
+      "alias": "Funding And Voting Power",
+      "permissions": "0x00000000",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 }
+      ]
+    },
+    {
+      "name": "SchemeRegistrar",
+      "alias" : "Plugin Manager",
+      "permissions": "0x0000001F",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 1 },
+        { "voteParams": 1 }
+      ]
+    },
+    {
+      "name": "GenericScheme",
+      "alias": "DutchX",
+      "permissions": "0x00000010",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 1 },
+        "0xb279182d99e65703f0076e4812653aab85fca0f0"
+      ]
+    }
+  ],
+  "StandAloneContracts": [
+    {
+      "name": "Wallet",
+      "fromArc": true,
+      "params": [
+        "AvatarAddress"
+      ]
+   }
+  ],
   "founders": [
     {
       "address": "0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1",
