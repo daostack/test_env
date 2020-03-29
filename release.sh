@@ -76,10 +76,12 @@ if [[ $devmode == 1 ]]; then
 fi
 
 if [[ $devmode != 1 ]]; then
+  package_name=$(cat package.json | jq -r '.name' | sed 's/\@//g')
+
   echo "publish new docker images"
   # commit the ganache image
   container_id=$(docker ps  -f "name=ganache" -l -q)
-  image_name=daostack/test-env-ganache
+  image_name=$package_name-ganache
   echo "docker commit $container_id $image_name:$image_version"
   docker commit $container_id $image_name:$image_version
   echo "docker push $image_name:$image_version"
@@ -87,7 +89,7 @@ if [[ $devmode != 1 ]]; then
 
   # commit the postgres image
   container_id=$(docker ps  -f "name=postgres" -l -q)
-  image_name=daostack/test-env-postgres
+  image_name=$package_name-postgres
   echo "docker commit $container_id $image_name:$image_version"
   docker commit $container_id $image_name:$image_version
   echo "docker push $image_name:$image_version"
@@ -95,7 +97,7 @@ if [[ $devmode != 1 ]]; then
 
   # commit the ipfs  image
   container_id=$(docker ps  -f "name=ipfs" -l -q)
-  image_name=daostack/test-env-ipfs
+  image_name=$package_name-ipfs
   echo "docker commit $container_id $image_name:$image_version"
   docker commit $container_id $image_name:$image_version
   echo "docker push $image_name:$image_version"
