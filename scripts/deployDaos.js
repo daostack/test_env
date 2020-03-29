@@ -1,4 +1,4 @@
-import { deployDao } from './deployDao'
+const { deployDao } = require('./deployDao')
 
 async function deployDaos() {
   await deployDao('dutchx-params.json')

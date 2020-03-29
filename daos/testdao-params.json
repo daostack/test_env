@@ -133,10 +133,7 @@
       "alias": "ReputationFromToken",
       "permissions": "0x00000000",
       "params": [
-        {
-          "StandAloneContract": 1
-        },
-        "0x0000000000000000000000000000000000000001",
+        { "StandAloneContract": 1 },
         "0x0000000000000000000000000000000000000001"
       ]
     }

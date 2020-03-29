@@ -80,10 +80,7 @@
   "StandAloneContracts": [
     {
       "name": "Wallet",
-      "fromArc": true,
-      "params": [
-        "AvatarAddress"
-      ]
+      "fromArc": true
    }
   ],
   "founders": [

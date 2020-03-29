@@ -20,7 +20,7 @@ while getopts "h?dfs" opt; do
 done
 
 migration_version=$(cat node_modules/@daostack/subgraph-experimental/package.json  | jq -r '.devDependencies."@daostack/migration-experimental"')
-docker_compose_migration_version=$(cat docker-compose.yml | grep daostack/migration | cut -d ":" -f 3 | sed "s/'//")
+docker_compose_migration_version=$(cat docker-compose.yml | grep daostack/migration-experimental | cut -d ":" -f 3 | sed "s/'//")
 package_version=$(cat package.json | jq -r '.version')
 image_version=$package_version
 
