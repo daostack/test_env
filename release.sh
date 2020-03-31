@@ -24,11 +24,12 @@ docker_compose_migration_version=$(cat docker-compose.yml | grep daostack/migrat
 package_version=$(cat package.json | jq -r '.version')
 image_version=$package_version
 
+# TODO: uncomment if versioning is changed to directly link arc->migration->subgraph together, currently versions can be missaligned
 # check if config is ok
-if [[ $docker_compose_migration_version != $migration_version ]]; then
-  echo "The migration version in the docker-compose file is not the same as the one in package.json of the subgraph dependency ($docker_compose_migration_version != $migration_version)"
-  exit
-fi
+# if [[ $docker_compose_migration_version != $migration_version ]]; then
+  # echo "The migration version in the docker-compose file is not the same as the one in package.json of the subgraph dependency ($docker_compose_migration_version != $migration_version)"
+  # exit
+# fi
 
 echo "Starting fresh docker containers..."
 set -x # echo on
