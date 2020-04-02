@@ -10,7 +10,7 @@
     "deployTestdao": "node ./createTestDAO.js",
     "deployNecdao": "node ./createNecDAO.js",
     "deployDutchdao": "node ./createDutchXDAO.js",
-    "postinstall": "cd node_modules/@daostack/subgraph && rm -rf node_modules && npm install"
+    "postinstall": "cd node_modules/@daostack/subgraph && rimraf node_modules && npm install"
   },
   "repository": {
     "type": "git",
@@ -26,12 +26,13 @@
   },
   "homepage": "https://github.com/daostack/test_env#readme",
   "dependencies": {
-    "@daostack/migration": "0.0.1-rc.41-v1",
-    "@daostack/subgraph": "0.0.39-0",
+    "@daostack/migration": "0.0.1-rc.41-v4",
+    "@daostack/subgraph": "0.0.39-1",
     "ipfs-http-client": "^32.0.1",
     "yaeti": "^1.0.2"
   },
   "devDependencies": {
+    "rimraf": "^2.6.3",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.6.0",
     "spawn-command": "0.0.2-1"
