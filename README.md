@@ -85,7 +85,8 @@ Create and release new images for a new [Arc](https://github.com/daostack/arc/)/
 - edit `package.json` and update the `@daostack/subgraph` and `@daostack/migration` dependencies
 - run `npm install`
 - edit `docker-compose.yml` and update the `graphprotocl/graph-node` (to match what is in the subgraph package.json) and the `daostack/migration` image. This image already has the DAOStack base contracts deployed
-- now run the `./release.sh` script described above.
+- Run `./release.sh -d` to see if the deployment scripts are working properly.  You may have to change the `deploySubgraph` and/or the `deployEthereum` scripts if there were any changes in `arc` or `subgraph`. You can do a sanity check of the result by checking the data of the graphql server at `http://127.0.0.1:8000`
+- if all look swell, run the `./release.sh` script described above.
 
 
 
