@@ -1,11 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 const { migrateDAO } = require('@daostack/migration')
-const VERSION = '0.0.1-rc.32'
 
 // default options passed to the DAOCreator scripts
 const options = {
-  // arcVersion: VERSION,
   quiet: false,
   disableconfs: false,
   force: true,
@@ -91,7 +89,6 @@ async function deployDaos() {
     let msg = `Unexpected DAO name: expected "DutchX DAO", found ${dutchXDAOInfo.name}; perhaps you specified the wrong version (in the code ehre above?)`;
     throw Error(msg);
   }
-  // dutchXDAOInfo.arcVersion = VERSION;
   // write data to the daos directory where the subgraph deployment can find it
   // await fs.writeFileSync(path.normalize(path.join(__dirname, 'node_modules/@daostack/subgraph/daos/private/dutchxdao.json')), JSON.stringify(dutchXDAOInfo, null, 4));
   await fs.writeFileSync(path.join(DAOS_DIR, 'dutchxdao.json'), JSON.stringify(dutchXDAOInfo, null, 4));
@@ -103,4 +100,4 @@ if (require.main === module) {
   deployDaos().catch((err) => { console.error(err); process.exit(1);});
 }
 
-module.exports = { options, VERSION }
+module.exports = { options }
