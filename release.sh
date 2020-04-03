@@ -111,5 +111,8 @@ if [[ $devmode != 1 ]]; then
   git push --tags
   # done
 
+  # pacakge on npm
+  npm publish --access public
+
   echo "Done!"
 fi
