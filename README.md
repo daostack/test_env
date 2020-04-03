@@ -73,12 +73,12 @@ services:
 `./release.sh` will create a new release, which will run the following steps:
 
 1. (re)start fresh docker containers for ipfs, postgres, graph-node, ganache
-1. deploy the contracts, DAOs, proposals, etc to ganache using `npm run deployEthereum`
-1. build a subgraph that indexes these using `npm run deploySubgraph`
+1. deploy the contracts, DAOs, proposals, etc to ganache using `npm run deploy-daos`
+1. build a subgraph that indexes these using `npm run deploy-subgraph`
 1. tag and publish the docker contains to dockerhub
 
 
-`./release.sh -d` will run the script in development mode, which will run all the steps except publish the ersult on docker hub
+`./release.sh -d` will run the script in development mode, which will run all the steps except publish the result on docker hub
 
 
 ## Instructions
@@ -92,7 +92,7 @@ Create and release new images for a new [Arc](https://github.com/daostack/arc/)/
 - edit `docker-compose.yml` and update the `graphprotocl/graph-node` (to match what is in the subgraph package.json) and the `daostack/migration` image. This image already has the DAOStack base contracts deployed
 - (re)-start the docker containers: `docker-compose up graph-node`. You will now have a graph server running on `http://127.0.0.1:8000`, but it will not have any subgraphs deployed to it yet.
 - `npm run migrate` deploy some DAOs and other contracts (in addition to those already available from the `@daostack/migration` image. If the `Arc` version has changed, this script may break. If so, fix it.
-- `npm run deploySubgraph`: will generate and deploy the subgraph.  `http://127.0.0.1:8000`
+- `npm run deploy-subgraph`: will generate and deploy the subgraph.  `http://127.0.0.1:8000`
 
 
 ## available accounts

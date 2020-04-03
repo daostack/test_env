@@ -3,10 +3,12 @@ const path = require('path')
 
 const defaults = {
   db_path: path.normalize(path.join(__dirname, './db')),
-  seed: 'TestRPC is awesome!' // default ganache-cli mnemonic (https://github.com/trufflesuite/ganache-cli/blob/develop/cli.js#L45)
+  // default ganache-cli mnemonic (https://github.com/trufflesuite/ganache-cli/blob/develop/cli.js#L45)
+  seed: 'TestRPC is awesome!'
 }
 
 const migration = require(path.normalize(path.join(__dirname, './migration.json')))
+
 module.exports = {
   Ganache: {
     server: opts => Ganache.server({ ...defaults, ...opts }),
@@ -19,5 +21,5 @@ module.exports = {
       throw new Error(`Could not retreive migration result for network ${network}`)
     }
   },
-  ...require('@daostack/migration/migrate')
+  ...require('@daostack/migration-experimental/migrate')
 }

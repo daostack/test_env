@@ -1,0 +1,183 @@
+{
+  "orgName": "Nectar DAO",
+  "tokenName": "Nectar DAO Token",
+  "tokenSymbol": "NDT",
+  "VotingMachinesParams": [
+    {
+      "boostedVotePeriodLimit": 1800,
+      "daoBountyConst": 10,
+      "minimumDaoBounty": 150,
+      "queuedVotePeriodLimit": 3600,
+      "queuedVoteRequiredPercentage": 50,
+      "preBoostedVotePeriodLimit": 600,
+      "proposingRepReward": 5000,
+      "quietEndingPeriod": 1800,
+      "thresholdConst": 1200,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 4,
+      "activationTime": 1570021200
+    },
+    {
+      "boostedVotePeriodLimit": 1800,
+      "daoBountyConst": 10,
+      "minimumDaoBounty": 500,
+      "queuedVotePeriodLimit": 3600,
+      "queuedVoteRequiredPercentage": 50,
+      "preBoostedVotePeriodLimit": 600,
+      "proposingRepReward": 10000,
+      "quietEndingPeriod": 1800,
+      "thresholdConst": 1300,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 4,
+      "activationTime": 1570021200
+    },
+    {
+      "boostedVotePeriodLimit": 1800,
+      "daoBountyConst": 10,
+      "minimumDaoBounty": 50,
+      "queuedVotePeriodLimit": 3600,
+      "queuedVoteRequiredPercentage": 50,
+      "preBoostedVotePeriodLimit": 600,
+      "proposingRepReward": 100,
+      "quietEndingPeriod": 1800,
+      "thresholdConst": 1200,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 4,
+      "activationTime": 1570021200
+    }
+  ],
+  "Schemes": [
+    {
+      "name": "ContributionReward",
+      "alias": "Funding And Voting Power",
+      "permissions": "0x00000000",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 }
+      ]
+    },
+    {
+      "name": "SchemeRegistrar",
+      "alias" : "Plugin Manager",
+      "permissions": "0x0000001F",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 1 },
+        { "voteParams": 1 }
+      ]
+    },
+    {
+      "name": "GenericScheme",
+      "alias": "ENSPublicResolver",
+      "permissions": "0x00000010",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 1 },
+        "0xe7410170f87102DF0055eB195163A03B7F2Bff4A"
+      ]
+    },
+    {
+      "name": "GenericScheme",
+      "alias": "ENSRegistry",
+      "permissions": "0x00000010",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 1 },
+        { "StandAloneContract": 0 }
+      ]
+    },
+    {
+      "name": "GenericScheme",
+      "alias": "RegistryLookup",
+      "permissions": "0x00000010",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 2 },
+        { "StandAloneContract": 1 }
+      ]
+    },
+    {
+      "name": "ContinuousLocking4Reputation",
+      "alias": "InfiniteReputation4Token",
+      "permissions": "0x00000010",
+      "params": [
+        850000,
+        1569963600,
+        7200,
+        1570014000,
+        12,
+        85000,
+        900,
+        100,
+        "0x543Ff227F64Aa17eA132Bf9886cAb5DB55DCAddf",
+        "0x0000000000000000000000000000000000000000"
+      ]
+    },
+    {
+      "name": "Auction4Reputation",
+      "alias": "GENAuction",
+      "permissions": "0x00000010",
+      "params": [
+        50000,
+        1569963600,
+        720,
+        10,
+        1570014000,
+        "0x543Ff227F64Aa17eA132Bf9886cAb5DB55DCAddf",
+        "AvatarAddress",
+        "0x0000000000000000000000000000000000000000"
+      ]
+    },
+    {
+      "name": "ReputationFromToken",
+      "alias": "ReputationFromToken",
+      "permissions": "0x00000000",
+      "params": [
+        { "StandAloneContract": 0 },
+        "0x0000000000000000000000000000000000000001"
+      ]
+    }
+  ],
+  "StandAloneContracts": [
+    {
+      "name": "Wallet",
+      "fromArc": true
+    },
+    {
+      "name": "Reputation",
+      "fromArc": true
+    }
+  ],
+  "founders": [
+    {
+      "address": "0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1",
+      "tokens": 1000,
+      "reputation": 1000
+    },
+    {
+      "address": "0xffcf8fdee72ac11b5c542428b35eef5769c409f0",
+      "tokens": 1000,
+      "reputation": 1000
+    },
+    {
+      "address": "0x22d491bde2303f2f43325b2108d26f1eaba1e32b",
+      "tokens": 1000,
+      "reputation": 1000
+    },
+    {
+      "address": "0xe11ba2b4d45eaed5996cd0823791e0c93114882d",
+      "tokens": 1000,
+      "reputation": 1000
+    },
+    {
+      "address": "0xd03ea8624c8c5987235048901fb614fdca89b117",
+      "tokens": 1000,
+      "reputation": 1000
+    },
+    {
+      "address": "0x95ced938f7991cd0dfcb48f0a06a40fa1af46ebc",
+      "tokens": 1000,
+      "reputation": 1000
+    }
+  ]
+}
