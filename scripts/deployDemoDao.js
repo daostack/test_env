@@ -88,6 +88,14 @@ async function deployDemoDao () {
     throw new Error(msg)
   }
 
+  const ActionMock = await new this.web3.eth.Contract(
+    require(`@daostack/migration-experimental/contracts/${this.arcVersion}/ActionMock.json`).abi,
+    undefined,
+    this.opts
+  ).deploy({
+    data: require(`@daostack/migration-experimental/contracts/${this.arcVersion}/ActionMock.json`).bytecode
+  }).send()
+
   const orgName = generateRandomName()
   const params = {
     orgName,
@@ -122,6 +130,16 @@ async function deployDemoDao () {
         ]
       },
       {
+        name: 'GenericScheme',
+        alias: 'GenericSchemeAlias',
+        permissions: '0x00000010',
+        params: [
+          'GenesisProtocolAddress',
+          { voteParams: 0 },
+          ActionMock.options.address
+        ]
+      },
+      {
         name: 'SchemeRegistrar',
         alias: 'SchemeRegistrarAlias',
         permissions: '0x0000001F',
@@ -129,6 +147,35 @@ async function deployDemoDao () {
           'GenesisProtocolAddress',
           { voteParams: 0 },
           { voteParams: 0 }
+        ]
+      }
+    ],
+    StandAloneContracts: [
+      {
+        name: "DAOToken",
+        fromArc: true,
+        params: [
+          'DemoToken',
+          'DTN',
+          0,
+          this.opts.from
+        ]
+      },
+      {
+        name: "Reputation",
+        fromArc: true,
+        params: [
+          this.opts.from
+        ]
+      },
+      {
+        name: "Avatar",
+        fromArc: true,
+        params: [
+          'DemoAvatar',
+          { StandAloneContract: 0 },
+          { StandAloneContract: 1 },
+          this.opts.from
         ]
       }
     ],
@@ -198,7 +245,8 @@ async function deployDemoDao () {
 
   const {
     Avatar,
-    Schemes
+    Schemes,
+    StandAloneContracts
   } = migration.dao[arcVersion]
 
   const ContributionReward = Schemes[0].address
@@ -231,32 +279,6 @@ async function deployDemoDao () {
     await this.logTx(tx, 'Finished Registering DAO in DAORegistry')
   }
 
-  const DemoDAOToken = await new this.web3.eth.Contract(
-    require(`@daostack/migration-experimental/contracts/${this.arcVersion}/DAOToken.json`).abi,
-    undefined,
-    this.opts
-  ).deploy({
-    data: require(`@daostack/migration-experimental/contracts/${this.arcVersion}/DAOToken.json`).bytecode,
-    arguments: ['DemoToken', 'DTN', 0]
-  }).send()
-
-  const DemoReputation = await new this.web3.eth.Contract(
-    require(`@daostack/migration-experimental/contracts/${this.arcVersion}/Reputation.json`).abi,
-    undefined,
-    this.opts
-  ).deploy({
-    data: require(`@daostack/migration-experimental/contracts/${this.arcVersion}/Reputation.json`).bytecode
-  }).send()
-
-  const DemoAvatar = await new this.web3.eth.Contract(
-    require(`@daostack/migration-experimental/contracts/${this.arcVersion}/Avatar.json`).abi,
-    undefined,
-    this.opts
-  ).deploy({
-    data: require(`@daostack/migration-experimental/contracts/${this.arcVersion}/Avatar.json`).bytecode,
-    arguments: ['DemoAvatar', DemoDAOToken.options.address, DemoReputation.options.address]
-  }).send()
-
   let result = { 'test': {} }
   result.test[this.arcVersion] = {
     dao: migration.dao[arcVersion],
@@ -265,9 +287,10 @@ async function deployDemoDao () {
     boostedProposalId,
     executedProposalId,
     organs: {
-      DemoAvatar: DemoAvatar.options.address,
-      DemoDAOToken: DemoDAOToken.options.address,
-      DemoReputation: DemoReputation.options.address
+      DemoAvatar: StandAloneContracts[2].address,
+      DemoDAOToken: StandAloneContracts[0].address,
+      DemoReputation: StandAloneContracts[1].address,
+      ActionMock: ActionMock.options.address
     }
   }
   return result
