@@ -10,8 +10,7 @@
     "deploy-dao-dutchx": "node ./scripts/deployDao.js dutchx-params.json",
     "deploy-dao-migration": "node ./scripts/deployDao.js migration-params.json",
     "deploy-dao-nectardao": "node ./scripts/deployDao.js nectardao-params.json",
-    "deploy-dao-testdao": "node ./scripts/deployDao.js testdao-params.json",
-    "postinstall": "cd node_modules/@daostack/subgraph-experimental && rm -rf node_modules && npm install"
+    "deploy-dao-testdao": "node ./scripts/deployDao.js testdao-params.json"
   },
   "repository": {
     "type": "git",
