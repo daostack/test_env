@@ -44,8 +44,8 @@ npm run deploy-daos
 
 echo "waiting for graph-node to start"
 set +x
-while [[ ! "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8000)" =~ ^(200|302)$ ]]; do
-  echo "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8000)"
+while [[ ! "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8020)" =~ ^(200|302|405)$ ]]; do
+  echo "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8020)"
   sleep 5
 done
 set -x
