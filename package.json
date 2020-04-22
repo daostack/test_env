@@ -1,6 +1,6 @@
 {
   "name": "@daostack/test-env-experimental",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "Testing environment for DAOstack projects.",
   "main": "index.js",
   "scripts": {
@@ -34,6 +34,7 @@
   "devDependencies": {
     "babel-eslint": "^10.0.3",
     "eslint": "^6.6.0",
-    "spawn-command": "0.0.2-1"
+    "spawn-command": "0.0.2-1",
+    "split2": "3.1.1"
   }
 }
