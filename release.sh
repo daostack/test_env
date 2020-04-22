@@ -44,8 +44,9 @@ npm run deploy-daos
 
 echo "waiting for graph-node to start"
 set +x
-while [[ ! "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8020)" =~ ^(200|302|405)$ ]]; do
-  echo "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8020)"
+while [[ ! "$(curl -I http://localhost:8020 2>/dev/null | head -n 1 | cut -d$' ' -f2)" =~ ^(405)$ ]]; do
+  echo "$(curl -I http://localhost:8020 2>/dev/null | head -n 1 | cut -d$' ' -f2)"
+  echo "$(docker-compose logs graph-node)"
   sleep 5
 done
 set -x
