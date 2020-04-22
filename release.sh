@@ -27,7 +27,7 @@ image_version=$package_version
 echo "Starting fresh docker containers..."
 set -x # echo on
 docker-compose down -v
-docker-compose up -d
+docker-compose up --build --force-recreate -d
 
 set +x
 echo "waiting for ganache to start"
@@ -44,7 +44,10 @@ npm run deploy-daos
 
 echo "waiting for graph-node to start"
 set +x
-while [[ ! "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8000)" =~ ^(200|302)$ ]]; do sleep 5; done
+while [[ ! "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8000)" =~ ^(200|302)$ ]]; do
+  echo "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8000)"
+  sleep 5
+done
 set -x
 
 if [[ $skip_install != 1 ]]; then
