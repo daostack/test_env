@@ -27,7 +27,7 @@ image_version=$package_version
 echo "Starting fresh docker containers..."
 set -x # echo on
 docker-compose down -v
-docker-compose up --build --force-recreate -d
+docker-compose up -d
 
 set +x
 echo "waiting for ganache to start"
