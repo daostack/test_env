@@ -24,17 +24,10 @@ docker_compose_migration_version=$(cat docker-compose.yml | grep daostack/migrat
 package_version=$(cat package.json | jq -r '.version')
 image_version=$package_version
 
-# TODO: uncomment if versioning is changed to directly link arc->migration->subgraph together, currently versions can be missaligned
-# check if config is ok
-# if [[ $docker_compose_migration_version != $migration_version ]]; then
-  # echo "The migration version in the docker-compose file is not the same as the one in package.json of the subgraph dependency ($docker_compose_migration_version != $migration_version)"
-  # exit
-# fi
-
 echo "Starting fresh docker containers..."
 set -x # echo on
 docker-compose down -v
-docker-compose up -d
+docker-compose up --force-recreate --build -d
 
 set +x
 echo "waiting for ganache to start"
@@ -91,6 +84,10 @@ if [[ $devmode != 1 ]]; then
   # commit the postgres image
   container_id=$(docker ps  -f "name=postgres" -l -q)
   image_name=$package_name-postgres
+  # first we must stop postgres to avoid this error http://disq.us/p/230w4jl
+  echo "docker exec -u postgres $container_id pg_ctl stop"
+  docker exec -d -u postgres $container_id pg_ctl stop
+  sleep 15
   echo "docker commit $container_id $image_name:$image_version"
   docker commit $container_id $image_name:$image_version
   echo "docker push $image_name:$image_version"
