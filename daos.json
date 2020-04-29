@@ -1,6 +1,6 @@
 {
   "daos": {
-    "0.1.1-rc.11": [
+    "0.1.1-rc.13": [
       {
         "name": "DutchX DAO",
         "Avatar": "0xA4b0478C51BB4a80205C0cBe53986362F25999EE",
@@ -28,10 +28,10 @@
           {
             "name": "Wallet",
             "address": "0xA395076f7DB04AaB22Db399cB4B15E15A0361b0d",
-            "arcVersion": "0.1.1-rc.11"
+            "arcVersion": "0.1.1-rc.13"
           }
         ],
-        "arcVersion": "0.1.1-rc.11"
+        "arcVersion": "0.1.1-rc.13"
       },
       {
         "name": "Migration DAO",
@@ -62,7 +62,7 @@
           }
         ],
         "StandAloneContracts": [],
-        "arcVersion": "0.1.1-rc.11"
+        "arcVersion": "0.1.1-rc.13"
       },
       {
         "name": "Nectar DAO",
@@ -116,15 +116,15 @@
           {
             "name": "Wallet",
             "address": "0x13F0e16898D44c45b91F94e1780225777b2c9D90",
-            "arcVersion": "0.1.1-rc.11"
+            "arcVersion": "0.1.1-rc.13"
           },
           {
             "name": "Reputation",
             "address": "0x6bBeaac624e74a4e278cEFc43A338FDa5C78784e",
-            "arcVersion": "0.1.1-rc.11"
+            "arcVersion": "0.1.1-rc.13"
           }
         ],
-        "arcVersion": "0.1.1-rc.11"
+        "arcVersion": "0.1.1-rc.13"
       },
       {
         "name": "DAO For Testing",
@@ -178,22 +178,22 @@
           {
             "name": "Wallet",
             "address": "0xD71D57c45084a67Fcd398e50cA45465b18043906",
-            "arcVersion": "0.1.1-rc.11"
+            "arcVersion": "0.1.1-rc.13"
           },
           {
             "name": "Reputation",
             "address": "0x16CE16A5030791563Dc82434a46645FCc544359A",
-            "arcVersion": "0.1.1-rc.11"
+            "arcVersion": "0.1.1-rc.13"
           }
         ],
-        "arcVersion": "0.1.1-rc.11"
+        "arcVersion": "0.1.1-rc.13"
       }
     ]
   },
   "demo": {
-    "0.1.1-rc.11": {
+    "0.1.1-rc.13": {
       "dao": {
-        "name": "Jocular Colorist",
+        "name": "Turgid Bunny",
         "Avatar": "0xc2a504a020e685154f10d3091F3C9f3B9fd5631C",
         "DAOToken": "0x186bb86aD6D12b29B57e54951aB967AA1bf346c4",
         "Reputation": "0x51d1EC722Ce030ceEa306266317e851d005FcE6A",
@@ -219,20 +219,20 @@
           {
             "name": "DAOToken",
             "address": "0x60735f509b9126311959E75e02c0ad05739e746a",
-            "arcVersion": "0.1.1-rc.11"
+            "arcVersion": "0.1.1-rc.13"
           },
           {
             "name": "Reputation",
             "address": "0xE5e75e582F11db4a1989c586C447BB5c94d6F314",
-            "arcVersion": "0.1.1-rc.11"
+            "arcVersion": "0.1.1-rc.13"
           },
           {
             "name": "Avatar",
             "address": "0x4E8a0657fbee58D026F14ac40C9eE718E8a331f3",
-            "arcVersion": "0.1.1-rc.11"
+            "arcVersion": "0.1.1-rc.13"
           }
         ],
-        "arcVersion": "0.1.1-rc.11"
+        "arcVersion": "0.1.1-rc.13"
       },
       "queuedProposalId": "0xdda5a5025e1b33ee2758d451b5485d1eaa728af090bc9576c2b71ea22d692f07",
       "preBoostedProposalId": "0xfef3f63d99b5b477ff485b4805fed74b44b827e7f99e1fd8b332ffe7fb9bad7e",
@@ -242,7 +242,7 @@
         "DemoAvatar": "0x4E8a0657fbee58D026F14ac40C9eE718E8a331f3",
         "DemoDAOToken": "0x60735f509b9126311959E75e02c0ad05739e746a",
         "DemoReputation": "0xE5e75e582F11db4a1989c586C447BB5c94d6F314",
-        "ActionMock": "0x027e4121d4675465E8029F09511D813c3476Ebf5"
+        "ActionMock": "0xC045C7B6B976d24728872d2117073c893d0B09C2"
       }
     }
   }
