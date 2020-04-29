@@ -1,3 +1,4 @@
+const path = require('path')
 const { getArc, ADDRESS_1, PRIVATE_KEY_1, ARC_VERSION, OVERRIDES } = require('./settings')
 const { getForgeOrgData, getSetSchemesData } = require('@daostack/common-factory')
 
@@ -6,18 +7,13 @@ async function createCommon() {
   let tx;
   let receipt
   const arc = await getArc();
-  // console.log(`fetching contractinfo from graphql...`)
-  // const contractInfo = arc.getContractInfoByName(`DAOFactoryInstance`, ARC_VERSION)
   const contractInfo = {
     address: arc.package['DAOFactoryInstance']
   }
-  console.log(1)
- 
-  // console.log(`fetching contractinfo from graphql...`)
-  // const contractInfo = arc.getContractInfoByName(`DAOFactoryInstance`, ARC_VERSION)
-  const contractABI = arc.getABI( undefined, 'DAOFactory', ARC_VERSION)
+  const abiDir = path.join(require.resolve('@daostack/migration-experimental'), '..')
+  // const contractABI = arc.getABI( undefined, 'DAOFactory', ARC_VERSION)
+  const contractABI = require(path.join(abiDir, 'contracts', ARC_VERSION,'DAOFactory.json')).abi
   const daoFactoryContract = await arc.getContract(contractInfo.address, contractABI)
-  // const votingMachineInfo = arc.getContractInfoByName(`GenesisProtocol`, ARC_VERSION)
   const votingMachineInfo = {
     addres: arc.package['GenesisProtocol']
   }

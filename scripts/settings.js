@@ -2,10 +2,10 @@ const path = require('path')
 const { Arc } = require('@daostack/arc.js')
 const ethers = require('ethers')
 // this value should coincide with the "migration-experimental" versoin
-const ARC_VERSION = '0.1.1-rc.13'
+const ARC_VERSION = '0.1.1-rc.15'
 
 
-// private key of this address: 
+// GANACHE ADDRESSES
 /*
 ganache_1     | Available Accounts
 ganache_1     | ==================
@@ -41,12 +41,10 @@ const PRIVATE_KEY_2 = '0x6cbed15c793ce57650b9877cf6fa156fbef513c4e6134f022a85b1f
 
 async function getArc() {
 
-    // const web3Provider = new ethers.providers.JsonRpcProvider( `https://rinkeby.infura.io/v3/e0cdf3bfda9b468fa908aa6ab03d5ba2`)
-    // const infuraProvider = new ethers.providers.InfuraProvider('rinkeby', 'e0cdf3bfda9b468fa908aa6ab03d5ba2')
     const web3Provider = new ethers.providers.JsonRpcProvider('http://localhost:8545')
     const wallet = new ethers.Wallet(PRIVATE_KEY_2, web3Provider)
-    // wallet = web3Provider
     const arc = new Arc({
+        // we just use arc for writing..
         // graphqlHttpProvider: "https://api.thegraph.com/subgraphs/name/daostack/v7_4_exp_rinkeby",
         // graphqlWsProvider: "wss://api.thegraph.com/subgraphs/name/daostack/v7_4_exp_rinkeby",
         web3Provider: wallet
@@ -55,14 +53,14 @@ async function getArc() {
     this.package = require(config.prevmigration).private.package[ARC_VERSION]
     console.log(this.package)
  
-    const contractInfos = Object.keys(this.package).map((x) => {
-        return {
-        id: x,
-        address: this.package[x],
-        version: ARC_VERSION
-        }
-    })
-    await arc.setContractInfos(contractInfos)
+    // const contractInfos = Object.keys(this.package).map((x) => {
+    //     return {
+    //     id: x,
+    //     address: this.package[x],
+    //     version: ARC_VERSION
+    //     }
+    // })
+    // await arc.setContractInfos(contractInfos)
     arc.package = this.package
 
     return arc
