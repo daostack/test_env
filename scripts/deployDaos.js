@@ -1,6 +1,6 @@
 const { deployDao } = require('./deployDao')
 const { deployDemoDao } = require('./deployDemoDao')
-const { createCommons } = require('./createCommon')
+const { createCommons } = require('./common/createCommon')
 const fs = require('fs')
 
 function logDao(dao, output) {

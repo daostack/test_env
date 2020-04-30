@@ -53,7 +53,7 @@ async function getArc() {
         // graphqlWsProvider: "wss://api.thegraph.com/subgraphs/name/daostack/v7_4_exp_rinkeby",
         web3Provider: wallet
     })
-    const config = require('./config')
+    const config = require('../config')
     this.package = require(config.prevmigration).private.package[ARC_VERSION]
  
     // const contractInfos = Object.keys(this.package).map((x) => {
