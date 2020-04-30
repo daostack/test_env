@@ -2,8 +2,24 @@ const path = require('path')
 const { getArc, ADDRESS_1, PRIVATE_KEY_1, ARC_VERSION, OVERRIDES } = require('./settings')
 const { getForgeOrgData, getSetSchemesData } = require('@daostack/common-factory')
 
-async function createCommon() {
-  const DAONAME = `Test DAO ${Math.floor(Math.random() * 100000)}`
+async function createCommon(opts = {
+  name: "",
+  fundingToken: '0x0000000000000000000000000000000000000000',
+  minFeeToJoin: 100,
+  memberReputation: 1000,
+  fundingGoal: 1000
+ }
+) {
+  const defaultOptions = {
+    fundingToken: '0x0000000000000000000000000000000000000000',
+    minFeeToJoin: 100,
+    memberReputation: 1000,
+    fundingGoal: 1000
+  }
+  opts = { ...defaultOptions, ...opts}
+  if (!opts.name) {
+    opts.name = `Test DAO ${Math.floor(Math.random() * 100000)}`
+  }
   let tx;
   let receipt
   const arc = await getArc();
@@ -11,24 +27,25 @@ async function createCommon() {
     address: arc.package['DAOFactoryInstance']
   }
   const abiDir = path.join(require.resolve('@daostack/migration-experimental'), '..')
-  // const contractABI = arc.getABI( undefined, 'DAOFactory', ARC_VERSION)
   const contractABI = require(path.join(abiDir, 'contracts', ARC_VERSION,'DAOFactory.json')).abi
   const daoFactoryContract = await arc.getContract(contractInfo.address, contractABI)
   const votingMachineInfo = {
-    addres: arc.package['GenesisProtocol']
+    address: arc.package['GenesisProtocol']
+  }
+  if (!votingMachineInfo.address) {
+    throw Error(`No GenesisProtocol found in arc.package`)
   }
 
   console.log(`Calling DAOFactory.forgeOrg(...)`)
   const forgeOrgData = 
       getForgeOrgData({
           DAOFactoryInstance: contractInfo.address,
-          orgName: DAONAME,
+          orgName: opts.name,
           founderAddresses: [ADDRESS_1],
           repDist: [100]
       })
   tx = await daoFactoryContract.forgeOrg(...forgeOrgData, OVERRIDES)
   console.log(`waiting for tx to be mined`)
-  console.log(`https://rinkeby.etherscan.io/tx/${tx.hash}`)
   receipt = await tx.wait()
   console.log(`done!`)
   // get the new avatar address of the thing that was just created..
@@ -45,24 +62,30 @@ async function createCommon() {
       DAOFactoryInstance: contractInfo.address,
       avatar: newOrgAddress,
       votingMachine: votingMachineInfo.address,
-      fundingToken: '0x0000000000000000000000000000000000000000',
-      minFeeToJoin: 100,
-      memberReputation: 100,
-      goal: 1000,
+      fundingToken: opts.fundingToken,
+      minFeeToJoin: opts.minFeeToJoin,
+      memberReputation: opts.memberReputation,
+      goal: opts.fundingGoal,
       deadline,
       metaData: ipfsHash,
     })
 
   tx = await daoFactoryContract.setSchemes(...schemeData, OVERRIDES)
   console.log(`waiting for tx to be mined`)
-  console.log(`https://rinkeby.etherscan.io/tx/${tx.hash}`)
   receipt = await tx.wait()
-  console.log(`Created a DAO at ${newOrgAddress} with name "${DAONAME}"`)
-
-  process.exit(0)
+  console.log(`Created a DAO at ${newOrgAddress} with name "${opts.name}"`)
 };
 
+async function main() {
+  await createCommon({
+    name: "Common test 1"
+  })
+  await createCommon({
+    name: "Common test 2"
+  })
+}
+
 if (require.main === module) {
-  createCommon().then(console.log(`done`)).catch(err => {console.error(err);process.exit(1)})
+  main().catch(err => {console.error(err);process.exit(1)})
 } 
-module.exports = { createCommon }
+module.exports = { createCommons: main }

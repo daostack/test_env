@@ -2,7 +2,7 @@ const path = require('path')
 const { Arc } = require('@daostack/arc.js')
 const ethers = require('ethers')
 // this value should coincide with the "migration-experimental" versoin
-const ARC_VERSION = '0.1.1-rc.15'
+const ARC_VERSION = '0.1.1-rc.16' // we should probably read this from the package..
 
 
 // GANACHE ADDRESSES
@@ -39,10 +39,14 @@ const PRIVATE_KEY_1 = '0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21
 const ADDRESS_2 = '0xFFcf8FDEE72ac11b5c542428B35EEF5769C409f0'
 const PRIVATE_KEY_2 = '0x6cbed15c793ce57650b9877cf6fa156fbef513c4e6134f022a85b1ffdd59b2a1'
 
+const ADDRESS_3 = '0x22d491Bde2303f2f43325b2108D26f1eAbA1e32b'
+const PRIVATE_KEY_3 = '0x6370fd033278c143179d81c5526140625662b8daa446c22ee2d73db3707e620c'
+
 async function getArc() {
 
     const web3Provider = new ethers.providers.JsonRpcProvider('http://localhost:8545')
-    const wallet = new ethers.Wallet(PRIVATE_KEY_2, web3Provider)
+    const wallet = new ethers.Wallet(PRIVATE_KEY_3, web3Provider)
+    // const wallet = web3Provider
     const arc = new Arc({
         // we just use arc for writing..
         // graphqlHttpProvider: "https://api.thegraph.com/subgraphs/name/daostack/v7_4_exp_rinkeby",
@@ -51,7 +55,6 @@ async function getArc() {
     })
     const config = require('./config')
     this.package = require(config.prevmigration).private.package[ARC_VERSION]
-    console.log(this.package)
  
     // const contractInfos = Object.keys(this.package).map((x) => {
     //     return {
