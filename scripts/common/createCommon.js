@@ -55,8 +55,8 @@ async function createCommon(opts = {
   console.log(`Calling DAOFactory.setSchemes(...)`)
   // TODO: Use proper IPFS hash
   let ipfsHash = 'metaData'
-  // deadline in Ethereum time, where 1 unit = 1 second (I think)
-  const deadline = (await arc.web3.getBlock('latest')).timestamp + 3000
+  // deadline in Ethereum time, where 1 unit = 1 second (I think), 10 years in the fuure
+  const deadline = (await arc.web3.getBlock('latest')).timestamp + 60*24*365*10
   // console.log(deadline)
   const schemeData = getSetSchemesData({
       DAOFactoryInstance: contractInfo.address,
