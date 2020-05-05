@@ -1,5 +1,6 @@
 const { deployDao } = require('./deployDao')
 const { deployDemoDao } = require('./deployDemoDao')
+const { createCommons } = require('./common/createCommon')
 const fs = require('fs')
 
 function logDao(dao, output) {
@@ -37,8 +38,8 @@ async function deployDaos() {
   logDao(await deployDao('nectardao-params.json'), output)
   logDao(await deployDao('testdao-params.json'), output)
   logDemo(await deployDemoDao(), output)
-
   fs.writeFileSync(__dirname + '/../daos.json', JSON.stringify(output, null, 2))
+  await createCommons()
 }
 
 if (require.main === module) {
