@@ -67,6 +67,16 @@
       ]
     },
     {
+      "name": "SchemeFactory",
+      "alias" : "Plugin Factory",
+      "permissions": "0x0000001F",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 1 },
+        { "packageContract": "DAOFactoryInstance" }
+      ]
+    },
+    {
       "name": "GenericScheme",
       "permissions": "0x00000010",
       "alias": "ENSPublicResolver",
