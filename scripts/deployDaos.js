@@ -40,9 +40,7 @@ async function deployDaos() {
   logDemo(await deployDemoDao(), output)
   fs.writeFileSync(__dirname + '/../daos.json', JSON.stringify(output, null, 2))
 
-  // TODO @jelle I commented this out so the release scripts runs successfully. I'm unsure
-  // how to update the scripts you have to use the v18.
-  // await createCommons()
+  await createCommons()
 }
 
 if (require.main === module) {

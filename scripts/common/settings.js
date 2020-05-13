@@ -1,8 +1,7 @@
-const path = require('path')
 const { Arc } = require('@daostack/arc.js')
 const ethers = require('ethers')
 // this value should coincide with the "migration-experimental" versoin
-const ARC_VERSION = '0.1.1-rc.16' // we should probably read this from the package..
+const ARC_VERSION = '0.1.1-rc.18' // we should probably read this from the package..
 
 
 // GANACHE ADDRESSES
