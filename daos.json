@@ -169,9 +169,14 @@
             "address": "0xEe0adf758DBa36bd3773d9a31Ba6A181c6c5243d"
           },
           {
+            "name": "SchemeFactory",
+            "alias": "SchemeFactory",
+            "address": "0xC9fC6C9911CB5b460cFD553e956ABfd813773277"
+          },
+          {
             "name": "ReputationFromToken",
             "alias": "ReputationFromToken",
-            "address": "0xC9fC6C9911CB5b460cFD553e956ABfd813773277"
+            "address": "0xb36122294483DCecE2f3Dba225D1aaEd9c3b9BeF"
           }
         ],
         "StandAloneContracts": [
@@ -187,48 +192,100 @@
           }
         ],
         "arcVersion": "0.1.1-rc.18"
+      },
+      {
+        "name": "Common test 1",
+        "Avatar": "0x1e405028793FbB373947fd99852E5BB852812a2d",
+        "DAOToken": "0x30F026d4E6D90C21da566d32153ca89D30cEb1db",
+        "Reputation": "0xf5c262e8710fED4d0ceCBda5E88d7514f48cD563",
+        "Controller": "0x41EC17dCFf55d1E59AC9f36b05Fa6f0663A81c6E",
+        "Schemes": [
+          {
+            "name": "JoinAndQuit",
+            "alias": "JoinAndQuit",
+            "address": "0x0134E1bfbd57B6f36EcdCA08f06f8d093fa31e2D"
+          },
+          {
+            "name": "FundingRequest",
+            "alias": "FundingRequest",
+            "address": "0x0dA6354b327CbbdA16e12e87640fAC7c2223eE68"
+          },
+          {
+            "name": "SchemeFactory",
+            "alias": "SchemeFactory",
+            "address": "0x1878DE7F38B692CBD8755F25ef6aC53640d39fc9"
+          }
+        ],
+        "StandAloneContracts": [],
+        "arcVersion": "0.1.1-rc.18"
+      },
+      {
+        "name": "Common test 2",
+        "Avatar": "0x47d49f75890D70d0B5215da149C6d2a053C531f2",
+        "DAOToken": "0xE41398e95ACa847E04bc0175a3eC936569e6F229",
+        "Reputation": "0x68bdF93244fa1F7bAE572C4242d68b02D044C359",
+        "Controller": "0xebbE3726558BEa9869d397505c9DEc2A6fB9A433",
+        "Schemes": [
+          {
+            "name": "JoinAndQuit",
+            "alias": "JoinAndQuit",
+            "address": "0x218f6E4257bC3e932936E476ebaF45BB7C5c6485"
+          },
+          {
+            "name": "FundingRequest",
+            "alias": "FundingRequest",
+            "address": "0xA83987fD12B2466D3D0944B4da917EC627dCD1a2"
+          },
+          {
+            "name": "SchemeFactory",
+            "alias": "SchemeFactory",
+            "address": "0x90e119d6ebED8E731f85c6D110146cA2B26728Ea"
+          }
+        ],
+        "StandAloneContracts": [],
+        "arcVersion": "0.1.1-rc.18"
       }
     ]
   },
   "demo": {
     "0.1.1-rc.18": {
       "dao": {
-        "name": "Defamatory Wheelwright",
-        "Avatar": "0xf5c262e8710fED4d0ceCBda5E88d7514f48cD563",
-        "DAOToken": "0xb36122294483DCecE2f3Dba225D1aaEd9c3b9BeF",
-        "Reputation": "0x30F026d4E6D90C21da566d32153ca89D30cEb1db",
-        "Controller": "0x1e405028793FbB373947fd99852E5BB852812a2d",
+        "name": "Egregious Silversmith",
+        "Avatar": "0x45267C65Df13E19554D60cB6e08cA361fCDE5230",
+        "DAOToken": "0x43Da53c81b8626c92d0A59177BF94F1c0cf887ef",
+        "Reputation": "0x531a88A4904D635140cE77c91279fAa19df7b905",
+        "Controller": "0x157955ca52A8c5A477ec318976485C7521D87c8e",
         "Schemes": [
           {
             "name": "ContributionReward",
             "alias": "ContributionRewardAlias",
-            "address": "0x1878DE7F38B692CBD8755F25ef6aC53640d39fc9"
+            "address": "0x43c7E2a0F9d618b4cDC7cD8229F165C3981b23f4"
           },
           {
             "name": "GenericScheme",
             "alias": "GenericSchemeAlias",
-            "address": "0xE41398e95ACa847E04bc0175a3eC936569e6F229"
+            "address": "0x1fe94f9D7EB2C5CcdC5090385F3aDcc0daf7c82b"
           },
           {
             "name": "SchemeRegistrar",
             "alias": "SchemeRegistrarAlias",
-            "address": "0x68bdF93244fa1F7bAE572C4242d68b02D044C359"
+            "address": "0xaAD62A60432801adde0C673cD129AE16daf44106"
           }
         ],
         "StandAloneContracts": [
           {
             "name": "DAOToken",
-            "address": "0x41EC17dCFf55d1E59AC9f36b05Fa6f0663A81c6E",
+            "address": "0x28d0cFf49cC653632b91eF61Ccb1B2cde7B952A9",
             "arcVersion": "0.1.1-rc.18"
           },
           {
             "name": "Reputation",
-            "address": "0x0134E1bfbd57B6f36EcdCA08f06f8d093fa31e2D",
+            "address": "0xa60A07396BF9174Bf0f25eF1f645CD4882bBd7a6",
             "arcVersion": "0.1.1-rc.18"
           },
           {
             "name": "Avatar",
-            "address": "0x0dA6354b327CbbdA16e12e87640fAC7c2223eE68",
+            "address": "0x775Cefc97eF851AE55db98140178e248411CC848",
             "arcVersion": "0.1.1-rc.18"
           }
         ],
@@ -239,10 +296,10 @@
       "boostedProposalId": "0xec79407745191d8ae8adac5080e8c77a6ce8b15e2c59c6ce20787d7b04ce211c",
       "executedProposalId": "0x58fba3fe8b4d4090ecce931bdf826532700805b151cc22ee5fddd03750a4b444",
       "organs": {
-        "DemoAvatar": "0x0dA6354b327CbbdA16e12e87640fAC7c2223eE68",
-        "DemoDAOToken": "0x41EC17dCFf55d1E59AC9f36b05Fa6f0663A81c6E",
-        "DemoReputation": "0x0134E1bfbd57B6f36EcdCA08f06f8d093fa31e2D",
-        "ActionMock": "0x84b085c0d4B4D6fbf6490f8246Bc5cD317d2d4cD"
+        "DemoAvatar": "0x775Cefc97eF851AE55db98140178e248411CC848",
+        "DemoDAOToken": "0x28d0cFf49cC653632b91eF61Ccb1B2cde7B952A9",
+        "DemoReputation": "0xa60A07396BF9174Bf0f25eF1f645CD4882bBd7a6",
+        "ActionMock": "0xbCFC9461B73D7Fb423552d6cd594f406F7B0585D"
       }
     }
   }

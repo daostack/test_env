@@ -1,0 +1,65 @@
+{
+  "orgName": "Common test 2",
+  "tokenName": "",
+  "tokenSymbol": "",
+  "VotingMachinesParams": [
+    {
+      "boostedVotePeriodLimit": 600,
+      "daoBountyConst": 10,
+      "minimumDaoBounty": 100,
+      "queuedVotePeriodLimit": 1800,
+      "queuedVoteRequiredPercentage": 50,
+      "preBoostedVotePeriodLimit": 600,
+      "proposingRepReward": 5,
+      "quietEndingPeriod": 300,
+      "thresholdConst": 2000,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 1,
+      "activationTime": 0
+    }
+  ],
+  "Schemes": [ 
+    {
+      "name": "JoinAndQuit",
+      "alias": "JoinAndQuit",
+      "permissions": "0x00000000",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        "0x0000000000000000000000000000000000000000",
+        100,
+        1000,
+        1000,
+        2220201261,
+        true
+      ]
+    },
+    {
+      "name": "FundingRequest",
+      "alias" : "FundingRequest",
+      "permissions": "0x00000000",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        "0x0000000000000000000000000000000000000000"
+      ]
+    },
+    {
+      "name": "SchemeFactory",
+      "alias": "SchemeFactory",
+      "permissions": "0x0000001F",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        { "packageContract": "DAOFactoryInstance" }
+      ]
+    }
+  ],
+  "founders": [
+    {
+      "address": "0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1",
+      "tokens": 0,
+      "reputation": 100
+    }
+  ]
+}
