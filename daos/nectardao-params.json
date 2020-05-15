@@ -73,7 +73,7 @@
       "params": [
         "GenesisProtocolAddress",
         { "voteParams": 1 },
-        "0xe7410170f87102DF0055eB195163A03B7F2Bff4A"
+        "0x6b85757e0a41f837dbe0b6b4b5157858b62d9a66"
       ]
     },
     {
@@ -83,7 +83,7 @@
       "params": [
         "GenesisProtocolAddress",
         { "voteParams": 1 },
-        { "StandAloneContract": 0 }
+        "0xe7410170f87102df0055eb195163a03b7f2bff4a"
       ]
     },
     {
@@ -93,7 +93,7 @@
       "params": [
         "GenesisProtocolAddress",
         { "voteParams": 2 },
-        { "StandAloneContract": 1 }
+        "0x9e32124cbecc2460e54735d356c0cb5ca8c8aa44"
       ]
     },
     {

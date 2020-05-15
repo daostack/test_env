@@ -1,6 +1,6 @@
 {
-  "name": "@daostack/test-env-experimental",
-  "version": "4.0.7",
+  "name": "@dorgtech/test-env-experimental",
+  "version": "4.0.9",
   "description": "Testing environment for DAOstack projects.",
   "main": "index.js",
   "scripts": {
