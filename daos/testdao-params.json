@@ -129,6 +129,16 @@
       ]
     },
     {
+      "name": "SchemeFactory",
+      "alias": "SchemeFactory",
+      "permissions": "0x0000001F",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 1 },
+        { "packageContract": "DAOFactoryInstance" }
+      ]
+    },
+    {
       "name": "ReputationFromToken",
       "alias": "ReputationFromToken",
       "permissions": "0x00000000",
