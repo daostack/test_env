@@ -10,8 +10,7 @@
     "deploy-dao-dutchx": "node ./scripts/deployDao.js dutchx-params.json",
     "deploy-dao-migration": "node ./scripts/deployDao.js migration-params.json",
     "deploy-dao-nectardao": "node ./scripts/deployDao.js nectardao-params.json",
-    "deploy-dao-testdao": "node ./scripts/deployDao.js testdao-params.json",
-    "createCommon": "node ./scripts/common/createCommon"
+    "deploy-dao-testdao": "node ./scripts/deployDao.js testdao-params.json"
   },
   "repository": {
     "type": "git",
@@ -28,7 +27,6 @@
   "homepage": "https://github.com/daostack/test_env#readme",
   "dependencies": {
     "@daostack/arc.js": "2.0.0-experimental.4",
-    "@daostack/common-factory": "1.2.0",
     "@daostack/migration-experimental": "0.1.1-rc.18-v0",
     "@daostack/subgraph-experimental": "0.1.1-rc.7-v8",
     "ethers": "^4.0.46",
