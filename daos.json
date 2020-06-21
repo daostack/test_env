@@ -250,7 +250,7 @@
   "demo": {
     "0.1.1-rc.23": {
       "dao": {
-        "name": "Antic Plumber",
+        "name": "Serpentine Engineering",
         "Avatar": "0x73880F0536cb1B91c4966165d724f54D653D6031",
         "DAOToken": "0xe54d24b6E3656d6D4421342F783da68B167Dc14f",
         "Reputation": "0x72F4d20a5A8f7bD174064D276BcB364b11e0Defb",
@@ -299,7 +299,7 @@
         "DemoAvatar": "0xf66bB0A35E912de1b958Ce1f82e58aCd91943Fb2",
         "DemoDAOToken": "0x660E1fCF4834c7e7a997335e4d0F4B34E370ecE0",
         "DemoReputation": "0x10b29ce5fEF7Bee66D94044E8a55783E7b7C8813",
-        "ActionMock": "0x9A6448b4bab66F952F2431E14562Bcfab7840cE3"
+        "ActionMock": "0x84b085c0d4B4D6fbf6490f8246Bc5cD317d2d4cD"
       }
     }
   }
