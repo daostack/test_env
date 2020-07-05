@@ -1,6 +1,6 @@
 {
   "daos": {
-    "0.1.1-rc.23": [
+    "0.1.2-rc.0": [
       {
         "name": "DutchX DAO",
         "Avatar": "0x9Eaee906432FB5f70ca1832975d0EfC08Ac08972",
@@ -28,10 +28,10 @@
           {
             "name": "Wallet",
             "address": "0x73B416B1fF2Ed49d8d23fa814482dbBEd44B2b7C",
-            "arcVersion": "0.1.1-rc.23"
+            "arcVersion": "0.1.2-rc.0"
           }
         ],
-        "arcVersion": "0.1.1-rc.23"
+        "arcVersion": "0.1.2-rc.0"
       },
       {
         "name": "Migration DAO",
@@ -62,7 +62,7 @@
           }
         ],
         "StandAloneContracts": [],
-        "arcVersion": "0.1.1-rc.23"
+        "arcVersion": "0.1.2-rc.0"
       },
       {
         "name": "Nectar DAO",
@@ -116,15 +116,15 @@
           {
             "name": "Wallet",
             "address": "0x197953F9E892273baEF236AfCbDa75359320AFFa",
-            "arcVersion": "0.1.1-rc.23"
+            "arcVersion": "0.1.2-rc.0"
           },
           {
             "name": "Reputation",
             "address": "0x4C8298cDaa4Fd44163B3Ab5D5e959a93476615c3",
-            "arcVersion": "0.1.1-rc.23"
+            "arcVersion": "0.1.2-rc.0"
           }
         ],
-        "arcVersion": "0.1.1-rc.23"
+        "arcVersion": "0.1.2-rc.0"
       },
       {
         "name": "DAO For Testing",
@@ -183,15 +183,15 @@
           {
             "name": "Wallet",
             "address": "0x4301870e3Daca4C13fB911b5c35b19d8d38aB6e7",
-            "arcVersion": "0.1.1-rc.23"
+            "arcVersion": "0.1.2-rc.0"
           },
           {
             "name": "Reputation",
             "address": "0x40aFDc6d08A8ebB217D7530777883b74F4E1c196",
-            "arcVersion": "0.1.1-rc.23"
+            "arcVersion": "0.1.2-rc.0"
           }
         ],
-        "arcVersion": "0.1.1-rc.23"
+        "arcVersion": "0.1.2-rc.0"
       },
       {
         "name": "Common test 1",
@@ -217,7 +217,7 @@
           }
         ],
         "StandAloneContracts": [],
-        "arcVersion": "0.1.1-rc.23"
+        "arcVersion": "0.1.2-rc.0"
       },
       {
         "name": "Common test 2",
@@ -243,14 +243,14 @@
           }
         ],
         "StandAloneContracts": [],
-        "arcVersion": "0.1.1-rc.23"
+        "arcVersion": "0.1.2-rc.0"
       }
     ]
   },
   "demo": {
-    "0.1.1-rc.23": {
+    "0.1.2-rc.0": {
       "dao": {
-        "name": "Serpentine Engineering",
+        "name": "Mannered Beets",
         "Avatar": "0x73880F0536cb1B91c4966165d724f54D653D6031",
         "DAOToken": "0xe54d24b6E3656d6D4421342F783da68B167Dc14f",
         "Reputation": "0x72F4d20a5A8f7bD174064D276BcB364b11e0Defb",
@@ -276,20 +276,20 @@
           {
             "name": "DAOToken",
             "address": "0x660E1fCF4834c7e7a997335e4d0F4B34E370ecE0",
-            "arcVersion": "0.1.1-rc.23"
+            "arcVersion": "0.1.2-rc.0"
           },
           {
             "name": "Reputation",
             "address": "0x10b29ce5fEF7Bee66D94044E8a55783E7b7C8813",
-            "arcVersion": "0.1.1-rc.23"
+            "arcVersion": "0.1.2-rc.0"
           },
           {
             "name": "Avatar",
             "address": "0xf66bB0A35E912de1b958Ce1f82e58aCd91943Fb2",
-            "arcVersion": "0.1.1-rc.23"
+            "arcVersion": "0.1.2-rc.0"
           }
         ],
-        "arcVersion": "0.1.1-rc.23"
+        "arcVersion": "0.1.2-rc.0"
       },
       "queuedProposalId": "0xa16a8dee2b09d48473a481d2dbf13a1eaa6f95a436ffa16babfe3217a4f877ae",
       "preBoostedProposalId": "0x1cc76777a36990574371fbb7c4439c91defd51545f17a3cf16520f8ea017df51",
