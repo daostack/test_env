@@ -3,7 +3,7 @@ const { deployDemoDao } = require('./deployDemoDao')
 const fs = require('fs')
 
 function logDao(dao, output) {
-  const version = Object.keys(dao.dao)[0]
+  const version = Object.keys(dao.dao)[Object.keys(dao.dao).length - 1]
 
   if (!output.daos) {
     output.daos = { }
@@ -17,7 +17,7 @@ function logDao(dao, output) {
 }
 
 function logDemo(demo, output) {
-  const version = Object.keys(demo.test)[0]
+  const version = Object.keys(demo.test)[Object.keys(demo.test).length - 1]
 
   if (!output.demo) {
     output.demo = { }
