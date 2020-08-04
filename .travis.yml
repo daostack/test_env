@@ -19,5 +19,5 @@ script:
   - echo -en 'travis_fold:end:script.1\\r'
 
   - echo './release.sh -d' && echo -en 'travis_fold:start:script.1\\r'
-  - travis_wait 30 ./release.sh -d
+  - ./release.sh -d
   - echo -en 'travis_fold:end:script.2\\r'
