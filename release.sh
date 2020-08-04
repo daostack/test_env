@@ -49,10 +49,11 @@ docker-compose exec  ganache cat migration.json > migration.json
 
 npm run deployEthereum
 
-echo "waiting for graph-node to start"
-set +x
-while [[ ! "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8000)" =~ ^(200|302)$ ]]; do sleep 5; done
-set -x
+# echo "waiting for graph-node to start"
+# set +x
+# while [[ ! "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8000)" =~ ^(200|302)$ ]]; do sleep 5; done
+# set -x
+sleep 60
 
 # echo pwd
 
