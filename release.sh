@@ -84,6 +84,14 @@ if [[ $devmode == 1 ]]; then
   echo "we are in devmode, so we are not published the new images to docker hub"
 fi
 if [[ $devmode != 1 ]]; then
+  echo "publish subgraph-test-env"
+
+  cd node_modules/@daostack/subgraph
+  jq '.name="@daostack/subgraph-test-env"' package.json > package2.json
+  mv package2.json package.json
+  npm publish
+  cd ../../../
+
   echo "publish new docker images"
   # commit the ganache image
   container_id=$(docker ps  -f "name=ganache" -l -q)
