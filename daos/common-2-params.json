@@ -20,8 +20,8 @@
   ],
   "Schemes": [ 
     {
-      "name": "JoinAndQuit",
-      "alias": "JoinAndQuit",
+      "name": "Join",
+      "alias": "Join",
       "permissions": "0x00000000",
       "params": [
         "GenesisProtocolAddress",
@@ -30,8 +30,7 @@
         100,
         1000,
         1000,
-        2220201261,
-        true
+        2220201261
       ]
     },
     {
