@@ -1,4 +1,4 @@
-FROM ipfs/go-ipfs
+FROM ipfs/go-ipfs:v0.4.23
 
 
 USER root
