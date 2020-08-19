@@ -57,6 +57,15 @@
       ]
     },
     {
+      "name": "TokenTrade",
+      "alias": "Token Trade",
+      "permissions": "0x00000000",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 }
+      ]
+    },
+    {
       "name": "SchemeRegistrar",
       "alias" : "Plugin Manager",
       "permissions": "0x0000001F",
