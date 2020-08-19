@@ -1,6 +1,6 @@
 {
   "name": "@daostack/test-env-experimental",
-  "version": "4.0.18",
+  "version": "4.0.19",
   "description": "Testing environment for DAOstack projects.",
   "main": "index.js",
   "scripts": {
