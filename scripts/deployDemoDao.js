@@ -148,6 +148,30 @@ async function deployDemoDao () {
           { voteParams: 0 },
           { voteParams: 0 }
         ]
+      },
+      {
+        name: "Join",
+        alias: "Join",
+        permissions: "0x00000000",
+        params: [
+          "GenesisProtocolAddress",
+          { "voteParams": 0 },
+          "0x0000000000000000000000000000000000000000",
+          100,
+          1000,
+          0,
+          2220201261
+        ]
+      },
+      {
+        name: "FundingRequest",
+        alias : "FundingRequest",
+        permissions: "0x00000000",
+        params: [
+          "GenesisProtocolAddress",
+          { "voteParams": 0 },
+          "0x0000000000000000000000000000000000000000"
+        ]
       }
     ],
     StandAloneContracts: [
@@ -250,6 +274,9 @@ async function deployDemoDao () {
   } = migration.dao[arcVersion]
 
   const ContributionReward = Schemes[0].address
+
+  await submitJoinProposal(Schemes[3].address, '0x000000000000000000000000000000000000000000000000000000000000abcd', 101, accounts[6].address);
+  await submitFundingRequest(Schemes[4].address, accounts[1].address, 101, '0x000000000000000000000000000000000000000000000000000000000000abcd');
 
   const {
     queuedProposalId,
@@ -474,6 +501,65 @@ async function submitProposal ({
 
   const proposalId = await prop.call()
   tx = await prop.send()
+  await this.logTx(tx, 'Submit new Proposal.')
+
+  return proposalId
+}
+
+async function submitJoinProposal (
+  joinAddress,
+  descHash,
+  amount,
+  member
+) {
+  console.log('Submitting a new Proposal...')
+
+  let tx
+
+  const join = await new this.web3.eth.Contract(
+    require(`@daostack/migration-experimental/contracts/${this.arcVersion}/Join.json`).abi,
+    joinAddress,
+    this.opts
+  )
+
+  const prop = join.methods.proposeToJoin(
+    descHash,
+    amount
+  )
+
+  const proposalId = await prop.call({ value: amount, from: member })
+  tx = await prop.send({ value: amount, from: member })
+  await this.logTx(tx, 'Submit new Proposal.')
+
+  await join.methods.setFundingGoalReachedFlag().send()
+  return proposalId
+}
+
+async function submitFundingRequest (
+  fundingRequestAddress,
+  beneficiary,
+  amount,
+  descHash
+
+) {
+  console.log('Submitting a new Proposal...')
+
+  let tx
+
+  const fundingRequest = await new this.web3.eth.Contract(
+    require(`@daostack/migration-experimental/contracts/${this.arcVersion}/FundingRequest.json`).abi,
+    fundingRequestAddress,
+    this.opts
+  )
+
+  const prop = fundingRequest.methods.propose(
+    beneficiary,
+    amount,
+    descHash
+  )
+
+  const proposalId = await prop.call({ value: amount })
+  tx = await prop.send({ value: amount })
   await this.logTx(tx, 'Submit new Proposal.')
 
   return proposalId
