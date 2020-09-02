@@ -558,8 +558,8 @@ async function submitFundingRequest (
     descHash
   )
 
-  const proposalId = await prop.call({ value: amount })
-  tx = await prop.send({ value: amount })
+  const proposalId = await prop.call()
+  tx = await prop.send()
   await this.logTx(tx, 'Submit new Proposal.')
 
   return proposalId
