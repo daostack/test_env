@@ -139,44 +139,49 @@
             "address": "0x3ADd7F3D4B2496826Da689d8A0172470f1Db71Bb"
           },
           {
-            "name": "SchemeRegistrar",
-            "alias": "Plugin Manager",
+            "name": "TokenTrade",
+            "alias": "Token Trade",
             "address": "0xd5DA3D2F7EA75B9EC93bAEc3727DC94B7d57b05A"
           },
           {
-            "name": "GenericScheme",
-            "alias": "ENSPublicResolver",
+            "name": "SchemeRegistrar",
+            "alias": "Plugin Manager",
             "address": "0x247CAAE58e94405B939fA1dD38f0B4f179E6B275"
           },
           {
             "name": "GenericScheme",
-            "alias": "ENSRegistry",
+            "alias": "ENSPublicResolver",
             "address": "0x925408B8c8CE2A3ed0dA652A5b4B6CfE0DAC3BFD"
           },
           {
             "name": "GenericScheme",
-            "alias": "RegistryLookup",
+            "alias": "ENSRegistry",
             "address": "0x9B01688FF6F070aFC6cC6ccD77ee95a83aDFccCb"
+          },
+          {
+            "name": "GenericScheme",
+            "alias": "RegistryLookup",
+            "address": "0x99fcBDb44583D1aA280775d25563106B23863d4e"
           },
           {
             "name": "ContinuousLocking4Reputation",
             "alias": "InfiniteReputation4Token",
-            "address": "0x99fcBDb44583D1aA280775d25563106B23863d4e"
+            "address": "0xbeA6Ff508B69A9E3aaE5aBb0f62A5cFbc49939B7"
           },
           {
             "name": "Auction4Reputation",
             "alias": "GENAuction",
-            "address": "0xbeA6Ff508B69A9E3aaE5aBb0f62A5cFbc49939B7"
+            "address": "0xDa560267102D1773DB14dE7050f71B941C10CCfb"
           },
           {
             "name": "SchemeFactory",
             "alias": "SchemeFactory",
-            "address": "0xDa560267102D1773DB14dE7050f71B941C10CCfb"
+            "address": "0x4Cc4dCb05cc7298f4aD24e388295b94723f6125d"
           },
           {
             "name": "ReputationFromToken",
             "alias": "ReputationFromToken",
-            "address": "0x4Cc4dCb05cc7298f4aD24e388295b94723f6125d"
+            "address": "0xF171877B6d272d1c79B73B93D6A4BD54b77310E3"
           }
         ],
         "StandAloneContracts": [
@@ -195,25 +200,25 @@
       },
       {
         "name": "Common test 1",
-        "Avatar": "0xdA736430c0790c587629FD7fF15D6C96d01794c6",
-        "DAOToken": "0xF171877B6d272d1c79B73B93D6A4BD54b77310E3",
-        "Reputation": "0x5a546Ba63FA2c74d5F8B78a58D7b4B7a9B7f8e4F",
-        "Controller": "0xEaBea104EccBaa46a89bF28dEE05c6Ec1a8CD759",
+        "Avatar": "0xEaBea104EccBaa46a89bF28dEE05c6Ec1a8CD759",
+        "DAOToken": "0x5a546Ba63FA2c74d5F8B78a58D7b4B7a9B7f8e4F",
+        "Reputation": "0xdA736430c0790c587629FD7fF15D6C96d01794c6",
+        "Controller": "0x759B0e944aFdc974046DC2fA1138495Ae3E9fe34",
         "Schemes": [
           {
             "name": "Join",
             "alias": "Join",
-            "address": "0x759B0e944aFdc974046DC2fA1138495Ae3E9fe34"
+            "address": "0xB29447E14e215Bd873DbaB2F03cEA2b28b180BC6"
           },
           {
             "name": "FundingRequest",
             "alias": "FundingRequest",
-            "address": "0xB29447E14e215Bd873DbaB2F03cEA2b28b180BC6"
+            "address": "0xa00a75A952Af14455dA677DB9413EDF15cAA655b"
           },
           {
             "name": "SchemeFactory",
             "alias": "SchemeFactory",
-            "address": "0xa00a75A952Af14455dA677DB9413EDF15cAA655b"
+            "address": "0x71cD33cac217E20C0bce40A7828902af488d26b0"
           }
         ],
         "StandAloneContracts": [],
@@ -221,25 +226,25 @@
       },
       {
         "name": "Common test 2",
-        "Avatar": "0xEf83b356aa49b63ECA89B54b74Ae2077a9207445",
-        "DAOToken": "0x71cD33cac217E20C0bce40A7828902af488d26b0",
-        "Reputation": "0x5438641444361acC36526240E2939D7c02B356eA",
-        "Controller": "0x48B49389A87f14086557a625621C282E23E9FD80",
+        "Avatar": "0x48B49389A87f14086557a625621C282E23E9FD80",
+        "DAOToken": "0x5438641444361acC36526240E2939D7c02B356eA",
+        "Reputation": "0xEf83b356aa49b63ECA89B54b74Ae2077a9207445",
+        "Controller": "0xA7C6588268e214B0636cCC1AbAE824552C19Cf2A",
         "Schemes": [
           {
             "name": "Join",
             "alias": "Join",
-            "address": "0xA7C6588268e214B0636cCC1AbAE824552C19Cf2A"
+            "address": "0x223783C72AdcB56cD2d6BbDfAB46fF5c0A28fadc"
           },
           {
             "name": "FundingRequest",
             "alias": "FundingRequest",
-            "address": "0x223783C72AdcB56cD2d6BbDfAB46fF5c0A28fadc"
+            "address": "0x0bf3F3aB259605429AC026d0E9d6CBf94331d722"
           },
           {
             "name": "SchemeFactory",
             "alias": "SchemeFactory",
-            "address": "0x0bf3F3aB259605429AC026d0E9d6CBf94331d722"
+            "address": "0xe1CaD876e42e87A5a5a074A6B4394b5e07797aED"
           }
         ],
         "StandAloneContracts": [],
@@ -250,55 +255,65 @@
   "demo": {
     "0.1.2-rc.6": {
       "dao": {
-        "name": "Endemic Silversmith",
-        "Avatar": "0x57755204F27B9ea66bd5752Da8C48A04051Dbd74",
-        "DAOToken": "0xB6B488FF225c69bA8c29f7A8F6CF772F587d2cd4",
-        "Reputation": "0xEe75710f44b581E9ED3BbDc985848954C4f2F772",
-        "Controller": "0x834fa484b779C6FC316b78C8Eaf18b2935245b43",
+        "name": "Jejune Moldmaker",
+        "Avatar": "0x834fa484b779C6FC316b78C8Eaf18b2935245b43",
+        "DAOToken": "0xEe75710f44b581E9ED3BbDc985848954C4f2F772",
+        "Reputation": "0x57755204F27B9ea66bd5752Da8C48A04051Dbd74",
+        "Controller": "0xbd8cb99BBC16f81b95fd4cC3f295DFFadD8c5d76",
         "Schemes": [
           {
             "name": "ContributionReward",
             "alias": "ContributionRewardAlias",
-            "address": "0xbd8cb99BBC16f81b95fd4cC3f295DFFadD8c5d76"
+            "address": "0x9e6CfF10c59A6140530117e394648C3770ebf463"
           },
           {
             "name": "GenericScheme",
             "alias": "GenericSchemeAlias",
-            "address": "0x9e6CfF10c59A6140530117e394648C3770ebf463"
+            "address": "0x7b7cF38e7850ED704E92a57d864141d75dADFC4c"
           },
           {
             "name": "SchemeRegistrar",
             "alias": "SchemeRegistrarAlias",
-            "address": "0x7b7cF38e7850ED704E92a57d864141d75dADFC4c"
+            "address": "0x964Dc94cecac9C096E6aE493D51C111F5aD79cFc"
+          },
+          {
+            "name": "Join",
+            "alias": "Join",
+            "address": "0x13F2650f13174ca919d2Ea9182ccDE8bCdA711ee"
+          },
+          {
+            "name": "FundingRequest",
+            "alias": "FundingRequest",
+            "address": "0x18F037e0DA4b34F8bC56b3D0EC05F7a711EC4E63"
           }
         ],
         "StandAloneContracts": [
           {
             "name": "DAOToken",
-            "address": "0xe1CaD876e42e87A5a5a074A6B4394b5e07797aED",
-            "arcVersion": "0.1.2-rc.6"
-          },
-          {
-            "name": "Reputation",
             "address": "0xdd38FA896E22C10eA32E98F0C2Bdaa6cf6Fb9F00",
             "arcVersion": "0.1.2-rc.6"
           },
           {
-            "name": "Avatar",
+            "name": "Reputation",
             "address": "0x257a7385FEc13e6E9B7414Da641f57975E2872e4",
+            "arcVersion": "0.1.2-rc.6"
+          },
+          {
+            "name": "Avatar",
+            "address": "0xB6B488FF225c69bA8c29f7A8F6CF772F587d2cd4",
             "arcVersion": "0.1.2-rc.6"
           }
         ],
         "arcVersion": "0.1.2-rc.6"
       },
-      "queuedProposalId": "0x04ae02ff9c24833292950c45a5bebc1fda119469d08f7bd230054fc637f9788d",
-      "preBoostedProposalId": "0x763b93ff35f33f198b9c42879631cd5cd6d887ce7d9eab58e2caecb916ccfb02",
-      "boostedProposalId": "0x113c3faedf8cf4b75838a7072277d0437d87a4aea2de99cdcfa052e7a7988096",
-      "executedProposalId": "0x9fa71d2a6f224e953a2565429ec605654467e765082eaedf9dc7189a6b60d331",
+      "queuedProposalId": "0x113c3faedf8cf4b75838a7072277d0437d87a4aea2de99cdcfa052e7a7988096",
+      "preBoostedProposalId": "0x9fa71d2a6f224e953a2565429ec605654467e765082eaedf9dc7189a6b60d331",
+      "boostedProposalId": "0x8d5cbe3c5261023a97f6befe54ad7e50215b4a75f3f33f70748419ca2f45d457",
+      "executedProposalId": "0x003b0bfacc84d823e13aa15d54f9043f179b0100cb974191596eaebbf4594be3",
       "organs": {
-        "DemoAvatar": "0x257a7385FEc13e6E9B7414Da641f57975E2872e4",
-        "DemoDAOToken": "0xe1CaD876e42e87A5a5a074A6B4394b5e07797aED",
-        "DemoReputation": "0xdd38FA896E22C10eA32E98F0C2Bdaa6cf6Fb9F00",
+        "DemoAvatar": "0xB6B488FF225c69bA8c29f7A8F6CF772F587d2cd4",
+        "DemoDAOToken": "0xdd38FA896E22C10eA32E98F0C2Bdaa6cf6Fb9F00",
+        "DemoReputation": "0x257a7385FEc13e6E9B7414Da641f57975E2872e4",
         "ActionMock": "0x807DECABe91c3C93396605D0DEA49c6cE67Dc59d"
       }
     }
