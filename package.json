@@ -1,6 +1,6 @@
 {
   "name": "@daostack/test-env",
-  "version": "3.0.39",
+  "version": "3.0.40",
   "description": "Testing environment for DAOstack projects.",
   "main": "index.js",
   "scripts": {
@@ -8,6 +8,7 @@
     "deployEthereum": "node ./deployEthereum.js",
     "deploySubgraph": "node ./deploySubgraph.js",
     "deployTestdao": "node ./createTestDAO.js",
+    "deployMultiCallDao": "node ./createTestMultiCallDAO.js",
     "deployNecdao": "node ./createNecDAO.js",
     "deployDutchdao": "node ./createDutchXDAO.js",
     "postinstall": "cd node_modules/@daostack/subgraph && rimraf node_modules && npm install"
