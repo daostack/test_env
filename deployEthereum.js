@@ -14,7 +14,8 @@ const options = {
   // prevmigration: path.normalize(path.join(__dirname, './migration.json')),
   output: path.normalize(path.join(__dirname, 'node_modules/@daostack/migration/migration.json')),
   // output: path.normalize(path.join(__dirname, './migration.json')),
-  params: JSON.parse(fs.readFileSync(path.join(__dirname, 'migration-params.json')))
+  params: JSON.parse(fs.readFileSync(path.join(__dirname, 'migration-params.json'))),
+  restart: true
 };
 
 // where to write the information of the deployed daos
@@ -62,7 +63,23 @@ async function deployDaos() {
   await fs.writeFileSync(path.join(DAOS_DIR, 'nectardao-rc.34.json'), JSON.stringify(daoInfo, null, 4));
   console.log(`Done creating ${expectedName}`);
 
-
+  /**
+   * CREATE DAO For Multicall
+   */
+  expectedName = 'DAO For Multicall'
+  console.log(`Creating ${expectedName}`);
+  options.arcVersion = '0.0.1-rc.47'
+  options.params = require('./testdao-multicall-params-v47.json')
+  migrationInfo = await migrateDAO(options)
+  daoInfo = migrationInfo['dao'][options.arcVersion];
+  
+  // do a sanity check just 
+  if (daoInfo.name !== expectedName) {
+    let msg = `Unexpected DAO name: expected "${expectedName}", found ${daoInfo.name}; perhaps you specified the wrong version (in the code ehre above?)`;
+    throw Error(msg);
+  }
+  await fs.writeFileSync(path.join(DAOS_DIR, 'multi-call-dao-rc.47.json'), JSON.stringify(daoInfo, null, 4));
+  console.log(`Done creating ${expectedName}`);
 
   /**
    * CREATE TEST DAO
