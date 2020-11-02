@@ -7,6 +7,29 @@
       "name": "GenericSchemeMultiCall",
       "fromArc": true,
       "arcVersion": "0.0.1-rc.47"
+    },
+    {
+      "name": "DxDaoSchemeConstraints",
+      "fromArc": true,
+      "params": [
+        "AvatarAddress",
+        100000,
+        100000,
+        ["0x0000000000000000000000000000000000000000"],
+        [1000],
+        [
+          "0x543Ff227F64Aa17eA132Bf9886cAb5DB55DCAddf", 
+          "0xb376E9D78A643B4e3b4b96dc6b9D8d974eF8E589",
+          "0x75275575fD45FB4B88CD2b56aE6E54a62b33c788"
+        ],
+        { "StandAloneContract": 0 }
+      ],
+      "arcVersion": "0.0.1-rc.47"
+    },
+    {
+      "name": "GenericSchemeMultiCall",
+      "fromArc": true,
+      "arcVersion": "0.0.1-rc.47"
     }
   ],
   "VotingMachinesParams": [
@@ -40,12 +63,27 @@
       "params":[
         "GenesisProtocolAddress",
         { "voteParams":0 },
-        "0x0000000000000000000000000000000000000000"
+        { "StandAloneContract": 1 }
       ],
       "permissions": "0x00000010",
       "alias": "GenericSchemeMultiCall",
       "fromArc": true,
       "arcVersion": "0.0.1-rc.47"
+  },
+  {
+    "name":"GenericSchemeMultiCall",
+    "schemeName":"GenericSchemeMultiCall",
+    "isUniversal":false,
+    "address": { "StandAloneContract": 2 },
+    "params":[
+      "GenesisProtocolAddress",
+      { "voteParams":0 },
+      "0x0000000000000000000000000000000000000000"
+    ],
+    "permissions": "0x00000010",
+    "alias": "GenericSchemeMultiCall",
+    "fromArc": true,
+    "arcVersion": "0.0.1-rc.47"
   }
   ],
   "unregisterOwner": true,
